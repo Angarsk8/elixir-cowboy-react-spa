@@ -6,6 +6,11 @@ defmodule TodoApp.BaseView do
       def render(template, assigns) when is_list(assigns) do
         render(template, Enum.into(assigns, %{}))
       end
+      def render(:not_found, _assigns) do
+        %{
+          message: "Resource Not Found"
+        }
+      end
     end
   end
 

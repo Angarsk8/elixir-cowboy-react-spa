@@ -25,20 +25,11 @@ defmodule TodoApp.TodosHandler do
         |> set_headers(default_headers)
         |> set_body(render(:show, todo: todo))
         |> reply(200)
-
       {:error, cs} ->
         req
         |> set_headers(default_headers)
         |> set_body(render(:errors, changeset: cs))
-        |> reply(422)
+        |> reply(422, false)
     end
-  end
-
-  # Private Functions
-
-  defp default_headers do
-    %{
-      "content-type" => "application/json"
-    }
   end
 end

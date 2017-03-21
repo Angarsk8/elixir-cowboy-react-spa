@@ -7,11 +7,9 @@ defmodule TodoApp.Todo do
     timestamps()
   end
 
-  @fields [:title]
-
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, @fields)
-    |> validate_required(@fields)
+    |> cast(params, [:title, :completed])
+    |> validate_required([:title])
   end
 end
