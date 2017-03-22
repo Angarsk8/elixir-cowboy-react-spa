@@ -1,0 +1,60 @@
+.todo-item {
+  display: flex;
+  padding: 15px 15px;
+  margin-bottom: 5px;
+  border: 1px solid #ebeff6;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.todo-item.active {
+  color: #fff;
+  background-color: #5dcff3;
+  border-color: #5dcff3;
+}
+
+.todo-item.active > section.left {
+  color: #fff;
+}
+
+.todo-item.active > .delete-icon {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.todo-item.active > .delete-icon:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.todo-item > section.left {
+  flex: 1;
+  display: flex;
+  color: #717171;
+}
+
+.todo-item section.left > .title {
+  font-size: 14px;
+  margin-left: 10px;
+  flex: 1;
+}
+
+.todo-item section.left > .title.completed {
+  text-decoration: line-through;
+}
+
+.todo-item .delete-icon {
+  color: #717171;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 350ms ease,
+    color 350ms ease,
+    transform 350ms ease;
+}
+
+.todo-item:hover .delete-icon {
+  opacity: 1;
+}
+
+.todo-item .delete-icon:hover {
+  color: #545252;
+  transform: scale(1.1);
+}

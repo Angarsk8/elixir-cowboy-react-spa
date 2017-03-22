@@ -21,7 +21,12 @@ defmodule TodoApp.Entities.BaseHandler do
       end
 
       def allowed_methods(req, state) do
-        {["GET", "POST"], req, state}
+        {["GET", "OPTIONS", "POST"], req, state}
+      end
+
+      def options(req, state) do
+        req = set_headers(req, default_headers)
+        {:ok, req, state}
       end
     end
   end
@@ -50,11 +55,16 @@ defmodule TodoApp.Entity.BaseHandler do
       end
 
       def allowed_methods(req, state) do
-        {["GET", "PUT", "PATCH", "DELETE"], req, state}
+        {["GET", "OPTIONS", "PUT", "PATCH", "DELETE"], req, state}
       end
 
       def delete_resource(req, state) do
         handle_delete(req, state)
+      end
+
+      def options(req, state) do
+        req = set_headers(req, default_headers)
+        {:ok, req, state}
       end
     end
   end
@@ -81,7 +91,8 @@ defmodule TodoApp.Handler.Helpers do
 
   def default_headers do
     %{
-      "content-type" => "application/json"
+      "Access-Control-Allow-Origin" => "*",
+      "Access-Control-Allow-Headers" => "Content-Type"
     }
   end
 end
