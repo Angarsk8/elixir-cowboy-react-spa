@@ -1,39 +1,36 @@
 .todo-item {
   display: flex;
   padding: 15px 15px;
-  margin-bottom: 5px;
-  border: 1px solid #ebeff6;
-  border-radius: 3px;
+  margin-bottom: 7px;
+  border: 1px solid #dfe4ec;
+  border-radius: 2px;
   background-color: #fff;
+  transition: background-color 150ms ease,
+    border-color 150ms ease;
+
+  animation-duration: 600ms;
 }
 
 .todo-item.active {
-  color: #fff;
   background-color: #5dcff3;
   border-color: #5dcff3;
 }
 
 .todo-item.active > section.left {
   color: #fff;
-}
-
-.todo-item.active > .delete-icon {
-  color: rgba(0, 0, 0, 0.35);
-}
-
-.todo-item.active > .delete-icon:hover {
-  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
 }
 
 .todo-item > section.left {
   flex: 1;
   display: flex;
   color: #717171;
+  transition: color 150ms ease, font-weight 150ms ease;
 }
 
 .todo-item section.left > .title {
   font-size: 14px;
-  margin-left: 10px;
+  margin-left: 15px;
   flex: 1;
 }
 
@@ -42,10 +39,10 @@
 }
 
 .todo-item .delete-icon {
-  color: #717171;
+  color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
   opacity: 0;
-  transition: opacity 350ms ease,
+  transition: opacity 150ms ease,
     color 350ms ease,
     transform 350ms ease;
 }
@@ -55,6 +52,16 @@
 }
 
 .todo-item .delete-icon:hover {
-  color: #545252;
+  color: rgba(0, 0, 0, 0.4);
   transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .todo-item .delete-icon {
+    opacity: 1;
+  }
+
+  .todo-item section.left > .title {
+    font-size: 15px;
+  }
 }

@@ -1,25 +1,25 @@
 import React from 'react'
-import TodoListViewContainer from '../containers/TodoListViewContainer'
+import TodosViewHeader from './TodosViewHeader'
+import TodosViewFooter from './TodosViewFooter'
+import TodosViewMain from './TodosViewMain'
 import './TodosView.css'
 
-function TodosView({ todos }) {
+function TodosView({
+  isFetching,
+  currentFilter,
+  createTodo,
+  filterTodos,
+  ...rest
+}) {
   return (
     <section className="todos-view">
-      <header>
-        <div>Todos</div>
-        <a className="add-todo" href="#">
-          <i className="fa fa-plus" aria-hidden="true"></i>
-        </a>
-      </header>
-      <main>
-        <TodoListViewContainer />
-      </main>
-      <footer>
-        <input type="checkbox"/>
-        <div className="mark-all-completed">
-          Mark all as completed
-        </div>
-      </footer>
+      <TodosViewHeader
+        createTodo={createTodo}
+        currentFilter={currentFilter}
+        filterTodos={filterTodos}
+      />
+      <TodosViewMain isFetching={isFetching} />
+      <TodosViewFooter { ...rest } />
     </section>
   )
 }

@@ -1,7 +1,10 @@
 import todosActions from './todos'
+import filterActions from './filter'
 
 export {
-  todosActions
+  todosActions,
+  filterActions
 }
 
 export * from './todos'
+export * from './filter'

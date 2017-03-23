@@ -3,34 +3,25 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import TodoItem from './TodoItem'
 import './TodoList.css'
 
-const allTodos =
-  Array(30)
-    .fill({})
-    .map((_, i) => ({
-      id: i,
-      title: `Test ${i}`,
-      completed: Math.floor(Math.random()*2)
-    }))
-
-function TodoList({ todos = allTodos }) {
-
+function TodoList({ todos, ...rest }) {
   return (
     <ReactCSSTransitionGroup
       transitionName={{
-        appear: "fadeIn",
-        enter: "fadeIn",
-        leave: "fadeOut"
+        enter: "fadeInDown",
+        leave: "zoomOut"
       }}
-      transitionAppear={true}
-      transitionEnterTimeout={500}
-      transitionAppearTimeout={500}
-      transitionLeaveTimeout={350}
+      transitionEnterTimeout={600}
+      transitionLeaveTimeout={300}
       className="todo-list"
       component="ul"
     >
       {todos.map(todo => {
         return (
-          <TodoItem key={todo.id} { ...todo } />
+          <TodoItem
+            key={todo.id}
+            { ...todo }
+            { ...rest }
+          />
         )
       })}
     </ReactCSSTransitionGroup>

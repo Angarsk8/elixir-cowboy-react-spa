@@ -5,6 +5,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'animate.css/animate.min.css'
 import 'normalize.css/normalize.css'
 import './main.css'
+import './utils/polyfills'
 
 import Root from './components/Root'
 

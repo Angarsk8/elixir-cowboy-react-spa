@@ -7,7 +7,10 @@ defmodule TodoApp.TodosHandler do
   # REST Handlers
 
   def handle_get(req, _state) do
-    todos = Repo.all(Todo)
+    todos = Todo
+      |> order_by(desc: :inserted_at) 
+      |> Repo.all
+
     req
     |> set_headers(default_headers)
     |> set_body(render(:index, todos: todos))

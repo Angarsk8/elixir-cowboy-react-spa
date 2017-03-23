@@ -1,0 +1,7 @@
+#todos-view-main {
+  flex: 1;
+  padding: 20px 15px;
+  background-color: #f9fafc;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

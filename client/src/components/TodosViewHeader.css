@@ -1,0 +1,67 @@
+#todos-view-header {
+  display: flex;
+  justify-content: space-between;
+  min-height: 50px;
+  align-items: center;
+  padding: 0 17px;
+  background-color: #f9fafc;
+  color: #717171;
+  border-bottom: 1px solid #e0e4e8;
+  background-image: linear-gradient(to bottom,rgba(40,50,60,0) 0,rgba(40,50,60,0.05) 100%);
+  background-repeat: repeat-x;
+  filter: none;
+}
+
+#todos-view-header .left {
+  display: flex;
+  align-items: center;
+}
+
+#todos-view-header .left .filters {
+  margin-left: 15px;
+}
+
+#todos-view-header .add-todo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #7dc63c;
+  color: #fff;
+  padding: 9px;
+  border-radius: 3px;
+  transition: background-color 350ms ease,
+    transform 350ms ease;
+}
+
+#todos-view-header .add-todo:hover {
+  background-color: #71b632;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  #todos-view-header .add-todo i {
+    font-size: 16px;
+  }
+}
+
+/* OVERRIDES REACT-SELECT COMPONENT DEFAULT STYLES*/
+
+.Select-control {
+  width: 120px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.Select-menu-outer {
+  font-size: 14px;
+}
+
+.Select-value-label {
+  color: #717171;
+}
+
+.is-focused:not(.is-open) > .Select-control {
+  border-color: #ccc !important;
+  box-shadow: none;
+}

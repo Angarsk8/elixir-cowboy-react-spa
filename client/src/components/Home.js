@@ -1,9 +1,9 @@
 import React from 'react'
-import TodosView from './TodosView'
+import TodosViewContainer from '../containers/TodosViewContainer'
 
 function Home() {
   return (
-    <TodosView />
+    <TodosViewContainer />
   )
 }
 

@@ -12,4 +12,6 @@ defmodule TodoApp.Todo do
     |> cast(params, [:title, :completed])
     |> validate_required([:title])
   end
+
+  def sorted_by_
 end

@@ -63,7 +63,10 @@ defmodule TodoApp.Entity.BaseHandler do
       end
 
       def options(req, state) do
-        req = set_headers(req, default_headers)
+        req =
+          req
+          |> set_headers(default_headers)
+          |> set_header("Access-Control-Allow-Methods", "PUT,PATCH,DELETE")
         {:ok, req, state}
       end
     end
