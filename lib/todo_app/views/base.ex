@@ -11,6 +11,16 @@ defmodule TodoApp.BaseView do
           message: "Resource Not Found"
         }
       end
+      def render(:errors, %{changeset: changeset}) do
+        errors =
+          Enum.reduce(changeset.errors, %{}, fn {field, detail}, acc ->
+            Map.put(acc, field, render_detail(detail))
+          end)
+
+        %{
+          errors: errors
+        }
+      end
     end
   end
 

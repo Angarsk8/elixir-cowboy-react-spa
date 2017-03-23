@@ -20,15 +20,23 @@ defmodule TodoApp do
 
   defp hosts do
     [
-      _: routes
+      _: api(:v1, routes)
     ]
   end
 
   defp routes do
     [
-      {"/api/v1/todos", TodoApp.TodosHandler, []},
-      {"/api/v1/todos/:id", TodoApp.TodoHandler, []}
+      {"/todos", TodoApp.TodosHandler, []},
+      {"/todos/:id", TodoApp.TodoHandler, []},
+      {"/todos/:todo_id/comments", TodoApp.CommentsHandler, []},
+      {"/todos/:todo_id/comments/:comment_id", TodoApp.CommentHandler, []}
     ]
+  end
+
+  defp api(:v1, routes) do
+    for {path, handler, opts} <- routes do
+      {"/api/v1" <> path, handler, opts}
+    end
   end
 
   defp port do

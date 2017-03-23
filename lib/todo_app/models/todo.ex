@@ -4,6 +4,9 @@ defmodule TodoApp.Todo do
   schema "todos" do
     field :title, :string
     field :completed, :boolean, default: false
+    field :description, :string
+    has_many :comments, TodoApp.Comment, on_delete: :nilify_all
+
     timestamps()
   end
 
@@ -13,5 +16,7 @@ defmodule TodoApp.Todo do
     |> validate_required([:title])
   end
 
-  def sorted_by_
+  def preloaded() do
+    from t in __MODULE__, preload: [:comments]
+  end
 end
