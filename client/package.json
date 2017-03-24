@@ -8,6 +8,7 @@
     "font-awesome": "^4.7.0",
     "halogen": "^0.2.0",
     "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.18.1",
     "normalize.css": "^5.0.0",
     "react-addons-css-transition-group": "^15.4.2",
     "react-redux": "^5.0.3",

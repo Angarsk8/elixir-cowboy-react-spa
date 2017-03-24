@@ -3,22 +3,23 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './TodosViewHeader.css'
 
-function TodosViewHeader({ currentFilter, createTodo, filterTodos }) {
+function TodosViewHeader({ currentFilter, filters, createTodo, filterTodos }) {
   return (
     <header id="todos-view-header">
       <section className="left">
-        <h3>Todos</h3>
+        <h4>TODOS</h4>
         <Select
           name="form-field-name"
           className="filters"
           value={currentFilter}
           clearable={false}
           searchable={false}
-          options={[
-            { value: 'ALL', label: 'All' },
-            { value: 'COMPLETED', label: 'Completed' },
-            { value: 'ACTIVE', label: 'Active' },
-          ]}
+          options={filters.map(f => {
+            return {
+              value: f,
+              label: f[0] + f.slice(1).toLowerCase()
+            }
+          })}
           onChange={option => { filterTodos(option.value) }}
         />
       </section>

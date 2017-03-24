@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import * as types from '../constants'
+import { SET_FILTER } from '../constants'
 
-function filter(state = 'ALL', action) {
+const availableFilters = ['ALL', 'ACTIVE', 'COMPLETED']
+
+function filter(state = availableFilters[0], action) {
   switch (action.type) {
-    case types.SET_FILTER:
+    case SET_FILTER:
       return action.payload.filter
     default:
       return state
@@ -16,4 +18,8 @@ export default combineReducers({
 
 export function getFilter({ filter }) {
   return filter
+}
+
+export function getAllFilters({ filters }) {
+  return availableFilters
 }

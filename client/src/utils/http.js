@@ -6,7 +6,7 @@ const { scheme, hostname } =
     ? { scheme: 'https'
       , hostname: window.location.hostname }
     : { scheme: 'http'
-      , hostname: '192.168.0.7:8080' }
+      , hostname: 'localhost:8080' }
 
 function buildHeaders(options = {}) {
   const defaultHeaders = {

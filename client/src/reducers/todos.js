@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import * as types from '../constants'
+import { todosTypes } from '../constants'
 
 function isFetching(state = false, action) {
   switch (action.type) {
-    case types.FETCH_TODOS_REQUEST:
+    case todosTypes.FETCH_TODOS_REQUEST:
       return true
-    case types.FETCH_TODOS_SUCCESS:
-    case types.FETCH_TODOS_FAILURE:
+    case todosTypes.FETCH_TODOS_SUCCESS:
+    case todosTypes.FETCH_TODOS_FAILURE:
       return false
     default:
       return state
@@ -15,9 +15,9 @@ function isFetching(state = false, action) {
 
 function todos(state = [], action) {
   switch (action.type) {
-    case types.FETCH_TODOS_SUCCESS:
+    case todosTypes.FETCH_TODOS_SUCCESS:
       return action.payload.todos
-    case types.UPDATE_TODO_SUCCESS:
+    case todosTypes.UPDATE_TODO_SUCCESS:
       const { todo } = action.payload
       return state.map(_todo => {
         if (_todo.id === todo.id) {
@@ -25,27 +25,27 @@ function todos(state = [], action) {
         }
         return _todo
       })
-    case types.DELETE_TODO_SUCCESS:
+    case todosTypes.DELETE_TODO_SUCCESS:
       return state.filter(todo =>
         todo.id !== action.payload.id
       )
-    case types.CREATE_TODO_SUCCESS:
+    case todosTypes.CREATE_TODO_SUCCESS:
       return [action.payload.todo, ...state]
-    case types.DELETE_ALL_TODOS_SUCCESS:
+    case todosTypes.DELETE_ALL_TODOS_SUCCESS:
       return []
     default:
       return state
   }
 }
 
-function selectedTodoId(state = -1, action) {
+function selectedTodoId(state = 0, action) {
   switch (action.type) {
-    case types.SELECT_TODO:
+    case todosTypes.SELECT_TODO:
       return action.payload.id
-    case types.DELETE_TODO_SUCCESS:
-      return state === action.payload.id ? -1 : state
-    case types.DELETE_ALL_TODOS_SUCCESS:
-      return -1
+    case todosTypes.DELETE_TODO_SUCCESS:
+      return state === action.payload.id ? 0 : state
+    case todosTypes.DELETE_ALL_TODOS_SUCCESS:
+      return 0
     default:
       return state
   }
@@ -78,10 +78,19 @@ export function getFetchingStatus({ isFetching }) {
   return isFetching
 }
 
+export function getSelectedTodoId({ selectedTodoId }) {
+  return selectedTodoId
+}
+
 export function getSelectedTodo({ todos, selectedTodoId }) {
   return todos.find(todo => todo.id === selectedTodoId)
 }
 
 export function getMarkedStatus({ todos }) {
   return todos.every(todo => todo.completed)
+}
+
+export function getAllTodoComments(state) {
+  const todo = getSelectedTodo(state)
+  return todo ? todo.comments : []
 }

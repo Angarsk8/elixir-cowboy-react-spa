@@ -1,23 +1,10 @@
-import {
-  apiURL,
-  httpGet,
-  httpPost,
-  httpUpdate,
-  httpDelete
-} from '../utils/http'
+import todosApi from './todos'
+import commentsApi from './comments'
 
-export function getTodos() {
-  return httpGet(`${apiURL}/todos`)
+export {
+  todosApi,
+  commentsApi
 }
 
-export function createTodo({ todo }) {
-  return httpPost(`${apiURL}/todos`, todo)
-}
-
-export function updateTodo({ id, changes }) {
-  return httpUpdate(`${apiURL}/todos/${id}`, changes)
-}
-
-export function deleteTodo({ id }) {
-  return httpDelete(`${apiURL}/todos/${id}`)
-}
+export * from './todos'
+export * from './comments'

@@ -9,6 +9,7 @@ import {
   getAllTodosIds,
   getMarkedStatus,
   getFetchingStatus,
+  getAllFilters,
   getFilter
 } from '../reducers'
 import TodosView from '../components/TodosView'
@@ -18,7 +19,8 @@ function mapStateToProps(state) {
     todosIds: getAllTodosIds(state),
     isFetching: getFetchingStatus(state),
     areAllCompleted: getMarkedStatus(state),
-    currentFilter: getFilter(state)
+    availableFilters: getAllFilters(state),
+    currentFilter: getFilter(state),
   }
 }
 

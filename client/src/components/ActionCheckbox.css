@@ -1,0 +1,20 @@
+.action-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.action-checkbox input[type=checkbox] {
+  vertical-align: middle;
+}
+.action-checkbox span {
+  vertical-align: middle;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+ @media (max-width: 768px) {
+  .action-checkbox span {
+    font-size: 16px;
+  }
+}

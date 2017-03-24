@@ -7,20 +7,22 @@ import './TodosView.css'
 function TodosView({
   isFetching,
   currentFilter,
+  availableFilters,
   createTodo,
   filterTodos,
   ...rest
 }) {
   return (
-    <section className="todos-view">
+    <div className="todos-view">
       <TodosViewHeader
         createTodo={createTodo}
         currentFilter={currentFilter}
+        filters={availableFilters}
         filterTodos={filterTodos}
       />
       <TodosViewMain isFetching={isFetching} />
       <TodosViewFooter { ...rest } />
-    </section>
+    </div>
   )
 }
 

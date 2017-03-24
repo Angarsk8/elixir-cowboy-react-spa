@@ -1,5 +1,6 @@
 .todos-view {
   display: flex;
   flex-direction: column;
+  border-right: 1px solid #e0e4e8;
   height: 100vh;
 }

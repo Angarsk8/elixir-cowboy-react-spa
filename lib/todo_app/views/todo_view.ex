@@ -24,7 +24,8 @@ defmodule TodoApp.TodoView do
       title: todo.title,
       description: todo.description,
       completed: todo.completed,
-      comments: comments
+      insertedAt: todo.inserted_at,
+      comments: comments,
     }
   end
 end

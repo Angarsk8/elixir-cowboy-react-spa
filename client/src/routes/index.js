@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import Home from '../components/Home'
+import App from '../components/App'
 
 function routes() {
   return (
     <Route path="/">
       <IndexRoute
-        component={Home}
+        component={App}
       />
     </Route>
   )

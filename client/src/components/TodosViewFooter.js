@@ -1,5 +1,5 @@
 import React from 'react'
-import FilterInput from './FilterInput'
+import ActionCheckbox from './ActionCheckbox'
 import './TodosViewFooter.css'
 
 function TodosViewFooter({
@@ -11,10 +11,10 @@ function TodosViewFooter({
 }) {
   return (
     <footer id="todos-view-footer">
-      <FilterInput
+      <ActionCheckbox
         show={todosIds.length}
-        condition={areAllCompleted}
-        onChange={() => {
+        checked={areAllCompleted}
+        action={() => {
           if (areAllCompleted) {
             toggleAllTodos(todosIds, false)
           } else {
@@ -23,14 +23,13 @@ function TodosViewFooter({
         }}
       >
         {areAllCompleted ? 'Unmark all todos' : 'Mak all as completed'}
-      </FilterInput>
-      <FilterInput
+      </ActionCheckbox>
+      <ActionCheckbox
         show={areAllCompleted && todosIds.length}
-        condition={false}
-        onChange={() => { deleteAllTodos(todosIds) }}
+        action={() => { deleteAllTodos(todosIds) }}
       >
         Delete all
-      </FilterInput>
+      </ActionCheckbox>
     </footer>
   )
 }

@@ -1,6 +1,6 @@
 alias TodoApp.{Repo, Todo, Comment}
 
-[todo | _] = Repo.all(Todo)
+todos = Repo.all(Todo)
 
 if length(todos) === 0 do
   for _ <- 1..10 do

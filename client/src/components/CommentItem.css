@@ -1,8 +1,7 @@
-.todo-item {
+.comment-item {
   display: flex;
   padding: 15px 15px;
-  margin-bottom: 7px;
-  border: 1px solid #dfe4ec;
+  border-bottom: 1px solid #dfe4ec;
   border-radius: 2px;
   background-color: #fff;
   transition: background-color 150ms ease,
@@ -11,34 +10,34 @@
   animation-duration: 600ms;
 }
 
-.todo-item.active {
-  background-color: #5dcff3;
-  border-color: #5dcff3;
-}
-
-.todo-item.active section.left {
+.comment-item.active section.left {
   color: #fff;
   font-weight: 600;
 }
 
-.todo-item section.left {
+.comment-item section.left {
   flex: 1;
   display: flex;
+  flex-direction: column;
   color: #717171;
   transition: color 150ms ease, font-weight 150ms ease;
 }
 
-.todo-item section.left > .title {
+.comment-item section.left > .text {
   font-size: 14px;
-  margin-left: 15px;
-  flex: 1;
+  margin-bottom: 5px;
 }
 
-.todo-item section.left > .title.completed {
-  text-decoration: line-through;
+.comment-item section.left > .time-ago {
+  font-size: 11px;
+  color: #a19999;
 }
 
-.todo-item .delete-icon {
+.comment-item section.left > .time-ago i {
+  margin-right: 4px;
+}
+
+.comment-item .delete-icon {
   color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
   opacity: 0;
@@ -47,21 +46,21 @@
     transform 350ms ease;
 }
 
-.todo-item:hover .delete-icon {
+.comment-item:hover .delete-icon {
   opacity: 1;
 }
 
-.todo-item .delete-icon:hover {
+.comment-item .delete-icon:hover {
   color: rgba(0, 0, 0, 0.4);
   transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
-  .todo-item .delete-icon {
+  .comment-item .delete-icon {
     opacity: 1;
   }
 
-  .todo-item section.left > .title {
+  .comment-item section.left > .text {
     font-size: 15px;
   }
 }

@@ -5,10 +5,10 @@ import './TodosViewMain.css'
 
 function TodosViewMain({ isFetching }) {
   return (
-    <main id="todos-view-main">
+    <div id="todos-view-main">
       {isFetching ? <Loading color="#5dcff3" /> : null}
       <TodoListContainer />
-    </main>
+    </div>
   )
 }
 

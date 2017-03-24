@@ -1,9 +1,9 @@
 #todos-view-header {
   display: flex;
   justify-content: space-between;
-  min-height: 50px;
+  min-height: 60px;
   align-items: center;
-  padding: 0 17px;
+  padding: 0 15px;
   background-color: #f9fafc;
   color: #717171;
   border-bottom: 1px solid #e0e4e8;
@@ -12,12 +12,12 @@
   filter: none;
 }
 
-#todos-view-header .left {
+#todos-view-header section.left {
   display: flex;
   align-items: center;
 }
 
-#todos-view-header .left .filters {
+#todos-view-header section.left .filters {
   margin-left: 15px;
 }
 

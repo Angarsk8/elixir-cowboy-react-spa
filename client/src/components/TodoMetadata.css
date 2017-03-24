@@ -1,0 +1,28 @@
+#todo-metadata .todo-date {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-size: 14px;
+  background-color: #f2f4f8;
+  border-bottom: 1px solid #e0e4e8;
+  color: #717171;
+}
+
+#todo-metadata .todo-date label {
+  color: #979797;
+  margin-right: 3px;
+}
+
+#todo-metadata textarea {
+  height: 80px;
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  border-radius: 0;
+  border-bottom: 1px solid #e0e4e8;
+  background-color: #f9fafc;
+  padding: 15px;
+  resize: vertical;
+  color: #717171;
+}
