@@ -26,10 +26,12 @@ defmodule TodoApp do
 
   defp routes do
     [
+      {"/registrations", TodoApp.RegistrationsHandler, []},
+      {"/current_user", TodoApp.CurrentUserHandler, []},
       {"/todos", TodoApp.TodosHandler, []},
       {"/todos/:id", TodoApp.TodoHandler, []},
       {"/todos/:todo_id/comments", TodoApp.CommentsHandler, []},
-      {"/todos/:todo_id/comments/:comment_id", TodoApp.CommentHandler, []}
+      {"/todos/:todo_id/comments/:comment_id", TodoApp.CommentHandler, []},
     ]
   end
 

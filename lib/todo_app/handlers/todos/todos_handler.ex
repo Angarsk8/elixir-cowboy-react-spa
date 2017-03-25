@@ -1,14 +1,17 @@
 defmodule TodoApp.TodosHandler do
-  use TodoApp.Entities.BaseHandler
+  alias TodoApp.{Todo, Entities, Authorization}
+
+  use Entities.BaseHandler
+  use Authorization.BaseHandler
 
   import TodoApp.TodoView, only: [render: 2]
-  alias TodoApp.Todo
 
   # REST Handlers
 
-  def handle_get(req, _state) do
+  def handle_get(req, user) do
     todos =
-      Todo.preloaded
+      user
+      |> assoc(:todos)
       |> order_by(desc: :inserted_at)
       |> Repo.all
 
@@ -18,14 +21,17 @@ defmodule TodoApp.TodosHandler do
     |> reply(200)
   end
 
-  def handle_post(req, _state) do
+  def handle_post(req, user) do
     {:ok, params, req} = :cowboy_req.read_body(req)
     decoded_params = Poison.decode!(params)
-    changeset = Todo.changeset(%Todo{}, decoded_params)
+
+    changeset =
+      user
+      |> build_assoc(:todos)
+      |> Todo.changeset(decoded_params)
 
     case Repo.insert(changeset) do
       {:ok, todo} ->
-        todo = Repo.preload(todo, :comments)
         req
         |> set_headers(default_headers)
         |> set_body(render(:show, todo: todo))

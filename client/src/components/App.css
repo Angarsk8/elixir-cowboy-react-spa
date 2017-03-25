@@ -1,5 +1,6 @@
 #app {
   display: flex;
+  height: 100vh;
 }
 
 #app main {
@@ -7,8 +8,51 @@
 }
 
 #app aside {
-  width: 25%;
+  width: 300px;
   display: flex;
   flex-direction: column;
+  border-left: 1px solid #e0e4e8;
   height: 100vh;
+  transition: transform 350ms ease;
+}
+
+#app aside .toggle-sidebar {
+  width: 40px;
+  height: 40px;
+  background: rgb(35, 40, 55);
+  color: #fff;
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: -40px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  box-shadow: -3px 2px 9px 1px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+  #app aside {
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  #app aside.show {
+    transform: translate3d(0, 0, 0);
+  }
+
+  #app aside .toggle-sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #app aside .toggle-sidebar i {
+    transition: transform 350ms ease;
+  }
+
+  #app aside.show .toggle-sidebar i {
+    transform: rotate(180deg);
+  }
 }

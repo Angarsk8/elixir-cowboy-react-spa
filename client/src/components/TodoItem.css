@@ -12,8 +12,8 @@
 }
 
 .todo-item.active {
-  background-color: #5dcff3;
-  border-color: #5dcff3;
+  background-color: #7389D3;
+  border-color: #7389D3;
 }
 
 .todo-item.active section.left {

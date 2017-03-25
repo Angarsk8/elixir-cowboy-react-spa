@@ -7,6 +7,7 @@ defmodule TodoApp.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     aliases: aliases(),
      deps: deps()]
   end
 
@@ -32,8 +33,15 @@ defmodule TodoApp.Mixfile do
       {:ecto, "~> 2.1"},
       {:postgrex, "~> 0.13.2"},
       {:faker, "~> 0.7.0"},
-      {:cowboy, github: "ninenines/cowboy", tag: "2.0.0-pre.7"},
-      {:poison, "~> 3.0"}
+      {:cowboy, [env: :prod, git: "https://github.com/ninenines/cowboy.git", tag: "2.0.0-pre.7", override: true]},
+      {:poison, "~> 3.0"},
+      {:guardian, "~> 0.14"}
     ]
+  end
+
+  defp aliases do
+    ["ecto.setup": ["ecto.create", "ecto.migrate"],
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

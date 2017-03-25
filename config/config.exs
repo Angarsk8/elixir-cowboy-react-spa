@@ -13,6 +13,21 @@ config :todo_app, ecto_repos: [TodoApp.Repo]
 
 config :todo_app, http: %{port: 8080}
 
+config :guardian, Guardian,
+  allowed_algos: ["HS512"],
+  verify_module: Guardian.JWT,
+  issuer: "TodoApp",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true,
+  secret_key: %{
+    "alg" => "HS512",
+    "k" => "QNsANyS4CyvAxSNyUuFtBJfJt3kxg4f9Lkk4Zg3Ack13xU59uf-RBdQFtz1ZQqIJ9h3RncQc-nH6BkuL6tShUQ",
+    "kty" => "oct",
+    "use" => "sig"
+  },
+  serializer: TodoApp.GuardianSerializer
+
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this

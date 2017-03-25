@@ -1,17 +1,21 @@
 defmodule TodoApp.CommentsHandler do
-  use TodoApp.Entities.BaseHandler
+  alias TodoApp.{Comment, Todo, Entities, Authorization}
+
+  use Entities.BaseHandler
+  use Authorization.BaseHandler
 
   import TodoApp.CommentView, only: [render: 2]
-  alias TodoApp.{Comment, Todo}
 
   # REST Handlers
 
-  def handle_get(req, _state) do
+  def handle_get(req, user) do
     todo_id = :cowboy_req.binding(:todo_id, req)
     comments =
-      Comment
+      user
+      |> assoc(:todos)
+      |> Repo.get(todo_id)
+      |> assoc(:comments)
       |> order_by(desc: :inserted_at)
-      |> where(todo_id: ^todo_id)
       |> Repo.all
 
     req
@@ -20,13 +24,14 @@ defmodule TodoApp.CommentsHandler do
     |> reply(200)
   end
 
-  def handle_post(req, _state) do
+  def handle_post(req, user) do
     todo_id = :cowboy_req.binding(:todo_id, req)
     {:ok, params, req} = :cowboy_req.read_body(req)
     decoded_params = Poison.decode!(params)
 
     changeset =
-      Todo
+      user
+      |> assoc(:todos)
       |> Repo.get(todo_id)
       |> build_assoc(:comments)
       |> Comment.changeset(decoded_params)

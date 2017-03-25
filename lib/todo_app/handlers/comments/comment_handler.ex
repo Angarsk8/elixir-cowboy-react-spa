@@ -1,20 +1,22 @@
 defmodule TodoApp.CommentHandler do
-  use TodoApp.Entity.BaseHandler
+  alias TodoApp.{Comment, Todo, Entity, Authorization}
+
+  use Entity.BaseHandler
+  use Authorization.BaseHandler
 
   import TodoApp.CommentView, only: [render: 2]
-  alias TodoApp.{Comment, Todo}
 
   # REST Handlers
 
-  def handle_get(req, _state) do
+  def handle_get(req, user) do
     todo_id = :cowboy_req.binding(:todo_id, req)
     comment_id = :cowboy_req.binding(:comment_id, req)
 
     query =
-      Todo
+      user
+      |> assoc(:todos)
       |> Repo.get(todo_id)
       |> assoc(:comments)
-      |> Repo.get(comment_id)
 
     case Repo.get(query, comment_id) do
       %Comment{} = comment ->
@@ -30,14 +32,15 @@ defmodule TodoApp.CommentHandler do
     end
   end
 
-  def handle_update(req, _state) do
+  def handle_update(req, user) do
     todo_id = :cowboy_req.binding(:todo_id, req)
     comment_id = :cowboy_req.binding(:comment_id, req)
     {:ok, params, req} = :cowboy_req.read_body(req)
     decoded_params = Poison.decode!(params)
 
     query =
-      Todo
+      user
+      |> assoc(:todos)
       |> Repo.get(todo_id)
       |> assoc(:comments)
 
@@ -64,11 +67,12 @@ defmodule TodoApp.CommentHandler do
     end
   end
 
-  def handle_delete(req, _state) do
+  def handle_delete(req, user) do
     todo_id = :cowboy_req.binding(:todo_id, req)
     comment_id = :cowboy_req.binding(:comment_id, req)
 
-    Todo
+    user
+    |> assoc(:todos)
     |> Repo.get(todo_id)
     |> assoc(:comments)
     |> Repo.get(comment_id)

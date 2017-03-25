@@ -1,14 +1,18 @@
 defmodule TodoApp.TodoHandler do
-  use TodoApp.Entity.BaseHandler
+  alias TodoApp.{Todo, Entity, Authorization}
+
+  use Entity.BaseHandler
+  use Authorization.BaseHandler
 
   import TodoApp.TodoView, only: [render: 2]
-  alias TodoApp.Todo
 
   # REST Handlers
 
-  def handle_get(req, _state) do
+  def handle_get(req, user) do
     id = :cowboy_req.binding(:id, req)
-    case Repo.get(Todo.preloaded, id) do
+    query = assoc(user, :todos)
+
+    case Repo.get(query, id) do
       %Todo{} = todo ->
         req
         |> set_headers(default_headers)
@@ -22,12 +26,13 @@ defmodule TodoApp.TodoHandler do
     end
   end
 
-  def handle_update(req, _state) do
+  def handle_update(req, user) do
     id = :cowboy_req.binding(:id, req)
     {:ok, params, req} = :cowboy_req.read_body(req)
     decoded_params = Poison.decode!(params)
+    query = assoc(user, :todos)
 
-    case Repo.get(Todo.preloaded, id) do
+    case Repo.get(query, id) do
       %Todo{} = todo ->
         changeset = Todo.changeset(todo, decoded_params)
         case Repo.update(changeset) do
@@ -50,10 +55,11 @@ defmodule TodoApp.TodoHandler do
     end
   end
 
-  def handle_delete(req, _state) do
+  def handle_delete(req, user) do
     id = :cowboy_req.binding(:id, req)
 
-    Todo
+    user
+    |> assoc(:todos)
     |> Repo.get!(id)
     |> Repo.delete!
 

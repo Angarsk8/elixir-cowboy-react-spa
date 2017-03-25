@@ -11,3 +11,9 @@ if length(todos) === 0 do
     Repo.insert!(comment)
   end
 end
+
+# alias TodoApp.{Repo, User, GuardianSerializer}
+# user = Repo.insert!(%User{})
+# { :ok, jwt, encoded_claims } = Guardian.encode_and_sign(user, :access)
+# { :ok, claims } = Guardian.decode_and_verify(jwt)
+# {:ok, user1 } = GuardianSerializer.from_token(claims["sub"])

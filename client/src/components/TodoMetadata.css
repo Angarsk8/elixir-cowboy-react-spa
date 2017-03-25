@@ -1,3 +1,8 @@
+#todo-metadata {
+  display: flex;
+  flex-direction: column;
+}
+
 #todo-metadata .todo-date {
   min-height: 60px;
   display: flex;
@@ -15,8 +20,7 @@
 }
 
 #todo-metadata textarea {
-  height: 80px;
-  width: 100%;
+  height: 90px;
   border: none;
   font-size: 14px;
   border-radius: 0;

@@ -4,7 +4,8 @@ defmodule TodoApp.Comment do
   schema "comments" do
     field :text, :string
     belongs_to :todo, TodoApp.Todo
-      
+    belongs_to :user, TodoApp.User
+
     timestamps()
   end
 

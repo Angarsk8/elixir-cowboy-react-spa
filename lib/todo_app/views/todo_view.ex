@@ -1,6 +1,5 @@
 defmodule TodoApp.TodoView do
   use TodoApp.BaseView
-  alias TodoApp.CommentView
 
   def render(:index, %{todos: todos}) do
     %{
@@ -14,18 +13,13 @@ defmodule TodoApp.TodoView do
   end
 
   def render(:todo, %{todo: todo}) do
-    comments =
-      :index
-      |> CommentView.render(comments: todo.comments)
-      |> Map.get(:data)
-
     %{
       id: todo.id,
       title: todo.title,
       description: todo.description,
       completed: todo.completed,
       insertedAt: todo.inserted_at,
-      comments: comments,
+      updatedAt: todo.updated_at
     }
   end
 end

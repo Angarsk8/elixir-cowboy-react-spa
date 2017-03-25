@@ -26,22 +26,29 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  background-color: #7dc63c;
+  background-color: #34c749;
   color: #fff;
-  padding: 9px;
+  margin-left: 15px;
+  height: 34px;
+  width: 34px;
   border-radius: 3px;
   transition: background-color 350ms ease,
     transform 350ms ease;
 }
 
 #todos-view-header .add-todo:hover {
-  background-color: #71b632;
+  background-color: #31bb45;
   transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
+  #todos-view-header .add-todo {
+    height: 36px;
+    width: 36px;
+  }
+
   #todos-view-header .add-todo i {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -58,10 +65,26 @@
 }
 
 .Select-value-label {
-  color: #717171;
+  color: #717171 !important;
 }
 
 .is-focused:not(.is-open) > .Select-control {
   border-color: #ccc !important;
   box-shadow: none;
+}
+
+.Select-option.is-selected {
+  background-color: #f2f4f8 !important;
+  color: #4a4747 !important;
+}
+
+.Select-option.is-focused {
+  background-color: #f5f7fa;
+  color: #717171;
+}
+
+@media (max-width: 768px) {
+  #todos-view-header {
+    justify-content: flex-start;
+  }
 }

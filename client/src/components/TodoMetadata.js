@@ -6,7 +6,7 @@ import './TodoMetadata.css'
 function DateLabel({ show = false, label, date, format }) {
   if (!show) {
     return (
-      <label>Date'll be displayed here</label>
+      <label>Date&#39;ll be displayed here</label>
     )
   }
 

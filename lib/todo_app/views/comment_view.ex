@@ -15,6 +15,7 @@ defmodule TodoApp.CommentView do
     %{
       id: comment.id,
       text: comment.text,
+      insertedAt: comment.inserted_at,
       updatedAt: comment.updated_at,
       todoId: comment.todo_id
     }
