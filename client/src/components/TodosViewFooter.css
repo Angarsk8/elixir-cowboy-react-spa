@@ -7,9 +7,3 @@
   color: #717171;
   border-top: 1px solid #e0e4e8;
 }
-
-@media (max-width: 768px) {
-  #todos-view-footer .filter-description {
-    font-size: 16px;
-  }
-}

@@ -23,7 +23,7 @@ class AppSidebar extends Component {
           onClick={this._toggleSidebar.bind(this)}
         >
           <i
-            className="fa fa-arrow-left" 
+            className="fa fa-arrow-left"
             aria-hidden="true"
           ></i>
         </span>
@@ -34,26 +34,15 @@ class AppSidebar extends Component {
   }
 }
 
-class App extends Component {
-  state = {
-    isOpen: false
-  }
-
-  _toggleSidebar() {
-
-  }
-
-  render() {
-    const { isOpen } = this.state
-    return (
-      <div id="app">
-        <main>
-          <TodosViewContainer />
-        </main>
-        <AppSidebar />
-      </div>
-    )
-  }
+function App() {
+  return (
+    <div id="app">
+      <main>
+        <TodosViewContainer />
+      </main>
+      <AppSidebar />
+    </div>
+  )
 }
 
 export default App

@@ -7,12 +7,12 @@ defmodule TodoApp.Repo.Migrations.CreateUsersTable do
     end
 
     alter table(:todos) do
-      add :user_id, references(:todos, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing)
     end
     create index(:todos, [:user_id])
 
     alter table(:comments) do
-      add :user_id, references(:todos, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing)
     end
     create index(:comments, [:user_id])
   end

@@ -2,11 +2,13 @@ import { combineReducers } from 'redux'
 import todos, * as todosSelectors from './todos'
 import filter, * as filterSelectors from './filter'
 import comments, * as commentsSelectors from './comments'
+import user, * as userSelectors from './user'
 
 const rootReducer = combineReducers({
   todos,
   filter,
-  comments
+  comments,
+  user
 })
 
 export default rootReducer
@@ -49,4 +51,8 @@ export function getAllComments({ comments }) {
 
 export function getCommentsFetchingStatus({ comments }) {
   return commentsSelectors.getFetchingStatus(comments)
+}
+
+export function getCurrentUser({ user }) {
+  return userSelectors.getCurrentUser(user)
 }

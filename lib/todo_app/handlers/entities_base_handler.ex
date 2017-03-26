@@ -26,7 +26,7 @@ defmodule TodoApp.Entities.BaseHandler do
 
       def options(req, state) do
         req = set_headers(req, default_headers)
-        {true, req, state}
+        {:ok, req, state}
       end
 
       defoverridable [allowed_methods: 2]

@@ -22,7 +22,6 @@ function DateLabel({ show = false, label, date, format }) {
 
 function TodoMetadata({ selectedTodo = {}, updateTodo }) {
   const { id, description, insertedAt } = selectedTodo
-  let descriptionRef
   return (
     <header id="todo-metadata">
       <div className="todo-date">

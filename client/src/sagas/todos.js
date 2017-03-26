@@ -1,4 +1,4 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, takeEvery, put, call } from 'redux-saga/effects'
 import { todosActions } from '../actions'
 import { todosTypes } from '../constants'
 import { todosApi } from '../api'
@@ -29,7 +29,7 @@ function* updateTodo(action) {
     yield put(todosActions.updateTodo(response.data))
   } catch (e) {
     console.error(`${action.type} failed: ${e.message}`)
-    yield put(todosActions.updateTodoFailure())
+    yield put(todosActions.updateTodoFailure(action.payload.id))
   }
 }
 
@@ -39,7 +39,7 @@ function* deleteTodo(action) {
     yield put(todosActions.deleteTodo(action.payload.id))
   } catch (e) {
     console.error(`${action.type} failed: ${e.message}`)
-    yield put(todosActions.deleteTodoFailure())
+    yield put(todosActions.deleteTodoFailure(action.payload.id))
   }
 }
 
@@ -50,21 +50,21 @@ function* toggleAllTodos(action) {
       call(todosApi.updateTodo, { id, changes: { completed } })
     )
     const todos = responses.map(resp => resp.data)
-    yield put(todosActions.setTodos(todos))
+    yield put(todosActions.toggleAllTodos(todos))
   } catch (e) {
     console.error(`${action.type} failed: ${e.message}`)
+    yield put(todosActions.toggleAllTodosFailure())
   }
 }
 
 function* deleteAllTodos(action) {
   try {
-    const { ids } = action.payload
-    const responses = yield ids.map(id =>
+    yield action.payload.ids.map(id =>
       call(todosApi.deleteTodo, { id })
     )
-
     yield put(todosActions.deleteAllTodos())
   } catch (e) {
+    yield put(todosActions.deleteAllTodosFailure())
     console.error(`${action.type} failed: ${e.message}`)
   }
 }
@@ -83,21 +83,21 @@ export function* watchFetchTodos() {
 }
 
 export function* watchCreateTodo() {
-  yield takeLatest(todosTypes.CREATE_TODO_REQUEST, createTodo)
+  yield takeEvery(todosTypes.CREATE_TODO_REQUEST, createTodo)
 }
 
 export function* watchUpdateTodo() {
-  yield takeLatest(todosTypes.UPDATE_TODO_REQUEST, updateTodo)
+  yield takeEvery(todosTypes.UPDATE_TODO_REQUEST, updateTodo)
 }
 
 export function* watchDeleteTodo() {
-  yield takeLatest(todosTypes.DELETE_TODO_REQUEST, deleteTodo)
+  yield takeEvery(todosTypes.DELETE_TODO_REQUEST, deleteTodo)
 }
 
 export function* watchToggleAllTodos() {
-  yield takeLatest(todosTypes.TOGGLE_ALL_TODOS, toggleAllTodos)
+  yield takeEvery(todosTypes.TOGGLE_ALL_TODOS_REQUEST, toggleAllTodos)
 }
 
 export function* watchDeleteAllTodos() {
-  yield takeLatest(todosTypes.DELETE_ALL_TODOS_REQUEST, deleteAllTodos)
+  yield takeEvery(todosTypes.DELETE_ALL_TODOS_REQUEST, deleteAllTodos)
 }

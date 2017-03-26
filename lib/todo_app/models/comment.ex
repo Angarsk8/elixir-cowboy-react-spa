@@ -11,7 +11,7 @@ defmodule TodoApp.Comment do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:text, :todo_id])
-    |> validate_required([:text, :todo_id])
+    |> cast(params, [:text])
+    |> validate_required([:text])
   end
 end

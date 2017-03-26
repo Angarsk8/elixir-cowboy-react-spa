@@ -6,8 +6,9 @@ import './TodosViewMain.css'
 function TodosViewMain({ isFetching }) {
   return (
     <div id="todos-view-main">
-      {isFetching ? <Loading color="#5dcff3" /> : null}
-      <TodoListContainer />
+      {isFetching
+        ? <Loading color="#5dcff3" />
+        : <TodoListContainer />}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {
   createTodoRequest,
-  toggleAllTodos,
+  toggleAllTodosRequest,
   deleteAllTodosRequest,
   setFilter
 } from '../actions'
@@ -30,7 +30,7 @@ function mapActionsToProps(dispatch) {
       dispatch(createTodoRequest(todo))
     },
     toggleAllTodos(ids, completed) {
-      dispatch(toggleAllTodos(ids, completed))
+      dispatch(toggleAllTodosRequest(ids, completed))
     },
     deleteAllTodos(ids) {
       dispatch(deleteAllTodosRequest(ids))

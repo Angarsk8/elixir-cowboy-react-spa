@@ -5,6 +5,9 @@ defmodule TodoApp.Authorization.BaseHandler do
 
       # Default Authorization Handler
 
+      def is_authorized(%{method: "OPTIONS"} = req, state) do
+        authorized_reply(req, state)
+      end
       def is_authorized(req, state) do
         case :cowboy_req.parse_header("authorization", req) do
           {:bearer, token} ->

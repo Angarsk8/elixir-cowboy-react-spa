@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import BounceLoader from 'halogen/BounceLoader'
+import classNames from 'classnames'
 import './TodoItem.css'
 
 class TodoItem extends Component {
@@ -32,7 +34,7 @@ class TodoItem extends Component {
     const titleRef  = this.titleRef
     const titleText = titleRef.innerText.trim()
 
-    if (titleText.length) {
+    if (titleText.length && titleText !== title) {
       updateTodo(id, {title: titleText})
       this.setState({editable: false})
       titleRef.innerText = titleText
@@ -55,24 +57,39 @@ class TodoItem extends Component {
   }
 
   render() {
-    const { id, title, completed, selectedTodo } = this.props
+    const { id, title, completed, updating, deleting, selectedTodo } = this.props
+    const processing = updating || deleting
     const active = selectedTodo.id === id
+    const todoClass = classNames('todo-item', 'animated', {
+      active,
+      updating,
+      deleting
+    })
+
     return (
       <li
-        className={`
-          todo-item animated ${active ? 'active' : ''}
-        `}
+        className={todoClass}
         onClick={this._onClickTodo.bind(this)}
       >
         <section className="left">
-          <input
-            type="checkbox"
-            checked={completed}
-            onClick={this._onClickCheckbox.bind(this)}
-          />
+          {updating
+            ? (
+              <BounceLoader
+                className="loading"
+                color="#fac801"
+                size="18px"
+              />
+            ): (
+              <input
+                type="checkbox"
+                checked={completed}
+                onClick={this._onClickCheckbox.bind(this)}
+                disabled={processing}
+              />
+            )}
           <div
-            contentEditable={this.state.editable}
-            className={`title ${completed ? 'completed' : ''}`}
+            contentEditable={this.state.editable && !processing}
+            className={classNames('title', { completed })}
             onBlur={this._onBlurContentEditable.bind(this)}
             onKeyPress={this._onKeyUpContentEditable.bind(this)}
             ref={node => { this.titleRef = node }}
@@ -81,12 +98,21 @@ class TodoItem extends Component {
             {title}
           </div>
         </section>
-        <div
-          className="delete-icon"
-          onClick={this._onClickDelete.bind(this)}
-        >
-          <i className="fa fa-times" aria-hidden="true"></i>
-        </div>
+        {deleting
+          ? (
+            <BounceLoader
+              className="loading"
+              color="#fc635d"
+              size="18px"
+            />
+          ): (
+            <div
+              className="delete-icon"
+              onClick={this._onClickDelete.bind(this)}
+            >
+              <i className="fa fa-times" aria-hidden="true"></i>
+            </div>
+          )}
       </li>
     )
   }

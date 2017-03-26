@@ -1,14 +1,15 @@
 import React from 'react'
 import ScaleLoader from 'halogen/ScaleLoader'
 
-function Loading(props) {
+function Loading({ color, margin = '0px' }) {
   const styles = {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    margin: margin
   }
   return (
     <div style={styles}>
-      <ScaleLoader {...props} />
+      <ScaleLoader color={color} />
     </div>
   )
 }

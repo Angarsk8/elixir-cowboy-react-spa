@@ -20,11 +20,18 @@ defmodule TodoApp do
 
   defp hosts do
     [
-      _: api(:v1, routes)
+      _: static_routes ++ api(:v1, api_routes)
     ]
   end
 
-  defp routes do
+  def static_routes do
+    [
+      {"/", :cowboy_static, {:priv_file, :todo_app, "build/index.html"}},
+      {"/static/[...]", :cowboy_static, {:priv_dir, :todo_app, "build/static"}}
+    ]
+  end
+
+  defp api_routes do
     [
       {"/registrations", TodoApp.RegistrationsHandler, []},
       {"/current_user", TodoApp.CurrentUserHandler, []},
@@ -35,9 +42,9 @@ defmodule TodoApp do
     ]
   end
 
-  defp api(:v1, routes) do
+  defp api(version, routes) do
     for {path, handler, opts} <- routes do
-      {"/api/v1" <> path, handler, opts}
+      {"/api/#{version}#{path}", handler, opts}
     end
   end
 

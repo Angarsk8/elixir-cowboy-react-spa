@@ -3,6 +3,11 @@
   padding: 15px 15px;
   border-bottom: 1px solid #dfe4ec;
   border-radius: 2px;
+  transition: background-color 350ms ease;
+}
+
+.comment-item.processing {
+  background-color: #fffbf3;
 }
 
 .comment-item section.left {

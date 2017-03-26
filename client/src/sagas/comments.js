@@ -1,4 +1,4 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, takeEvery, put, call } from 'redux-saga/effects'
 import { commentsActions } from '../actions'
 import { commentsTypes } from '../constants'
 import { commentsApi } from '../api'
@@ -55,13 +55,13 @@ export function* watchFetchComments() {
 }
 
 export function* watchCreateComment() {
-  yield takeLatest(commentsTypes.CREATE_COMMENT_REQUEST, createComment)
+  yield takeEvery(commentsTypes.CREATE_COMMENT_REQUEST, createComment)
 }
 
 export function* watchDeleteComment() {
-  yield takeLatest(commentsTypes.DELETE_COMMENT_REQUEST, deleteComment)
+  yield takeEvery(commentsTypes.DELETE_COMMENT_REQUEST, deleteComment)
 }
 
 export function* watchUpdateComment() {
-  yield takeLatest(commentsTypes.UPDATE_COMMENT_REQUEST, updateComment)
+  yield takeEvery(commentsTypes.UPDATE_COMMENT_REQUEST, updateComment)
 }

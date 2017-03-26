@@ -15,11 +15,7 @@ function TodosViewFooter({
         show={todosIds.length}
         checked={areAllCompleted}
         action={() => {
-          if (areAllCompleted) {
-            toggleAllTodos(todosIds, false)
-          } else {
-            toggleAllTodos(todosIds, true)
-          }
+          toggleAllTodos(todosIds, !areAllCompleted)
         }}
       >
         {areAllCompleted ? 'Unmark all todos' : 'Mak all as completed'}

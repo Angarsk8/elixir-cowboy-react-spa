@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import CommentItem from './CommentItem'
 import './CommentList.css'
 

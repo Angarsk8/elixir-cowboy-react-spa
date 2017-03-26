@@ -9,21 +9,6 @@ import {
 import { getAllTodos, getSelectedTodo } from '../reducers'
 import TodoList from '../components/TodoList'
 
-class TodoListContainer extends Component {
-  componentWillMount() {
-    const { todos, fetchTodos } = this.props
-    if (!todos.length) {
-      fetchTodos()
-    }
-  }
-
-  render() {
-    return (
-      <TodoList {...this.props} />
-    )
-  }
-}
-
 function mapStateToProps(state) {
   return {
     todos: getAllTodos(state),
@@ -33,9 +18,6 @@ function mapStateToProps(state) {
 
 function mapActionsToProps(dispatch) {
   return {
-    fetchTodos() {
-      dispatch(fetchTodosRequest())
-    },
     updateTodo(id, changes) {
       dispatch(updateTodoRequest(id, changes))
     },
@@ -51,4 +33,4 @@ function mapActionsToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(TodoListContainer)
+)(TodoList)

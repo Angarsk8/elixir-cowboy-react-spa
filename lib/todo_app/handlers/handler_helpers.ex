@@ -19,6 +19,6 @@ defmodule TodoApp.Handler.Helpers do
 
   def default_headers do
     %{"Access-Control-Allow-Origin" => "*",
-      "Access-Control-Allow-Headers" => "Content-Type"}
+      "Access-Control-Allow-Headers" => "Content-Type,Authorization"}
   end
 end

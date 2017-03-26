@@ -1,5 +1,5 @@
 defmodule TodoApp.CommentsHandler do
-  alias TodoApp.{Comment, Todo, Entities, Authorization}
+  alias TodoApp.{Comment, Entities, Authorization}
 
   use Entities.BaseHandler
   use Authorization.BaseHandler

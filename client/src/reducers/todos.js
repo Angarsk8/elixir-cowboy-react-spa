@@ -16,6 +16,7 @@ function isFetching(state = false, action) {
 function todos(state = [], action) {
   switch (action.type) {
     case todosTypes.FETCH_TODOS_SUCCESS:
+    case todosTypes.TOGGLE_ALL_TODOS_SUCCESS:
       return action.payload.todos
     case todosTypes.UPDATE_TODO_SUCCESS:
       const { todo } = action.payload
@@ -38,6 +39,41 @@ function todos(state = [], action) {
   }
 }
 
+function updating(state = [], action) {
+  switch (action.type) {
+    case todosTypes.TOGGLE_ALL_TODOS_REQUEST:
+      return action.payload.ids
+    case todosTypes.TOGGLE_ALL_TODOS_SUCCESS:
+    case todosTypes.TOGGLE_ALL_TODOS_FAILURE:
+      return []
+    case todosTypes.UPDATE_TODO_REQUEST:
+      return [...state, action.payload.id]
+    case todosTypes.UPDATE_TODO_SUCCESS:
+      return state.filter(id => id !== action.payload.todo.id)
+    case todosTypes.UPDATE_TODO_FAILURE:
+      return state.filter(id => id !== action.payload.id)
+    default:
+      return state
+  }
+}
+
+function deleting(state = [], action) {
+  switch (action.type) {
+    case todosTypes.DELETE_ALL_TODOS_REQUEST:
+      return action.payload.ids
+    case todosTypes.DELETE_ALL_TODOS_SUCCESS:
+    case todosTypes.DELETE_ALL_TODOS_FAILURE:
+      return []
+    case todosTypes.DELETE_TODO_REQUEST:
+      return [...state, action.payload.id]
+    case todosTypes.DELETE_TODO_SUCCESS:
+    case todosTypes.DELETE_TODO_FAILURE:
+      return state.filter(id => id !== action.payload.id)
+    default:
+      return state
+  }
+}
+
 function selectedTodoId(state = 0, action) {
   switch (action.type) {
     case todosTypes.SELECT_TODO:
@@ -54,20 +90,14 @@ function selectedTodoId(state = 0, action) {
 export default combineReducers({
   todos,
   isFetching,
+  updating,
+  deleting,
   selectedTodoId
 })
 
-export function getAllTodos({ todos }, { filter }) {
-  switch (filter) {
-    case 'ALL':
-      return todos
-    case 'COMPLETED':
-      return todos.filter(todo => todo.completed)
-    case 'ACTIVE':
-      return todos.filter(todo => !todo.completed)
-    default:
-      return todos
-  }
+export function getAllTodos({ todos, updating, deleting }, { filter }) {
+  const filteredTodos = filterTodos(todos, filter)
+  return putProcessingStatus(filteredTodos, updating, deleting)
 }
 
 export function getAllTodosIds({ todos }) {
@@ -90,7 +120,23 @@ export function getMarkedStatus({ todos }) {
   return todos.every(todo => todo.completed)
 }
 
-export function getAllTodoComments(state) {
-  const todo = getSelectedTodo(state)
-  return todo ? todo.comments : []
+/*  PRIVATE HELPER FUNCTIONS */
+
+function filterTodos(todos, filter) {
+  switch (filter) {
+    case 'COMPLETED':
+      return todos.filter(todo => todo.completed)
+    case 'ACTIVE':
+      return todos.filter(todo => !todo.completed)
+    default:
+      return todos
+  }
+}
+
+function putProcessingStatus(todos, updating, deleting) {
+  return todos.map(todo => ({
+    ...todo,
+    updating: updating.includes(todo.id),
+    deleting: deleting.includes(todo.id)
+  }))
 }

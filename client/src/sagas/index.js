@@ -1,5 +1,6 @@
 import todosWatchers from './todos'
 import commentsWatchers from './comments'
+import initialSetup from './init'
 
 function runWatchers(watchers) {
   return Object
@@ -9,6 +10,7 @@ function runWatchers(watchers) {
 
 export default function* rootSaga() {
   yield [
+    initialSetup(),
     ...runWatchers(todosWatchers),
     ...runWatchers(commentsWatchers)
   ]

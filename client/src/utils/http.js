@@ -3,19 +3,20 @@ import 'es6-promise'
 
 const { scheme, hostname } =
   process.env.NODE_ENV === 'production'
-    ? { scheme: 'https'
-      , hostname: window.location.hostname }
+    ? { scheme: 'http'
+      , hostname: window.location.host }
     : { scheme: 'http'
-      , hostname: '192.168.0.7:8080' }
+      , hostname: 'localhost:8080' }
 
-function buildHeaders(options = {}) {
+function buildHeaders() {
   const defaultHeaders = {
     'Accept': 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${getAuthToken()}`
   }
+
   return new Headers({
-    ...defaultHeaders,
-    ...options
+    ...defaultHeaders
   })
 }
 
@@ -29,6 +30,18 @@ function checkStatus(response) {
   }
 }
 
+export function getAuthToken() {
+  return JSON.parse(localStorage.getItem('authToken'))
+}
+
+export function setAuthToken(token) {
+  localStorage.setItem('authToken', JSON.stringify(token))
+}
+
+export function removeAuthToken() {
+  localStorage.removeItem('authToken')
+}
+
 export const apiURL = `${scheme}://${hostname}/api/v1`
 
 export async function httpGet(url) {
@@ -38,8 +51,6 @@ export async function httpGet(url) {
 
   return checkStatus(response).json()
 }
-
-window.httpGet = httpGet
 
 export async function httpPost(url, data) {
   const body = JSON.stringify(data)

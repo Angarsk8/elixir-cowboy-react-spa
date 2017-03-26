@@ -1,13 +1,16 @@
 import React from 'react'
 import CommentListContainer from '../containers/CommentListContainer'
 import CommentsViewFooter from './CommentsViewFooter'
+import Loading from './Loading'
 import './CommentsView.css'
 
-function CommentsView({ todoId, createComment }) {
+function CommentsView({ todoId, isFetching, createComment }) {
   return (
     <section className="comments-view">
       <div className="main">
-        <CommentListContainer todoId={todoId}/>
+        {isFetching
+          ? <Loading color="#5dcff3" margin="18px"/>
+          : <CommentListContainer todoId={todoId}/>}
       </div>
       <CommentsViewFooter
         todoId={todoId}

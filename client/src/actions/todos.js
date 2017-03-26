@@ -14,8 +14,12 @@ export default {
   deleteTodo,
   deleteTodoFailure,
   selectTodo,
+  toggleAllTodosRequest,
   toggleAllTodos,
-  deleteAllTodos
+  toggleAllTodosFailure,
+  deleteAllTodosRequest,
+  deleteAllTodos,
+  deleteAllTodosFailure
 }
 
 export function fetchTodosRequest() {
@@ -82,9 +86,12 @@ export function updateTodo(todo) {
   }
 }
 
-export function updateTodoFailure() {
+export function updateTodoFailure(id) {
   return {
-    type: todosTypes.UPDATE_TODO_FAILURE
+    type: todosTypes.UPDATE_TODO_FAILURE,
+    payload: {
+      id
+    }
   }
 }
 
@@ -106,9 +113,12 @@ export function deleteTodo(id) {
   }
 }
 
-export function deleteTodoFailure() {
+export function deleteTodoFailure(id) {
   return {
-    type: todosTypes.DELETE_TODO_FAILURE
+    type: todosTypes.DELETE_TODO_FAILURE,
+    payload: {
+      id
+    }
   }
 }
 
@@ -121,13 +131,28 @@ export function selectTodo(id) {
   }
 }
 
-export function toggleAllTodos(ids, completed) {
+export function toggleAllTodosRequest(ids, completed) {
   return {
-    type: todosTypes.TOGGLE_ALL_TODOS,
+    type: todosTypes.TOGGLE_ALL_TODOS_REQUEST,
     payload: {
       ids,
       completed
     }
+  }
+}
+
+export function toggleAllTodos(todos) {
+  return {
+    type: todosTypes.TOGGLE_ALL_TODOS_SUCCESS,
+    payload: {
+      todos
+    }
+  }
+}
+
+export function toggleAllTodosFailure() {
+  return {
+    type: todosTypes.TOGGLE_ALL_TODOS_FAILURE
   }
 }
 
@@ -143,5 +168,11 @@ export function deleteAllTodosRequest(ids) {
 export function deleteAllTodos() {
   return {
     type: todosTypes.DELETE_ALL_TODOS_SUCCESS
+  }
+}
+
+export function deleteAllTodosFailure() {
+  return {
+    type: todosTypes.DELETE_ALL_TODOS_FAILURE
   }
 }

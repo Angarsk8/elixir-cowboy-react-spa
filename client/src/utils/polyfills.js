@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 if (!Array.prototype.includes) {
   Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
     var O = Object(this)

@@ -37,7 +37,7 @@ defmodule TodoApp.Entity.BaseHandler do
           req
           |> set_headers(default_headers)
           |> set_header("Access-Control-Allow-Methods", "PUT,PATCH,DELETE")
-        {true, req, state}
+        {:ok, req, state}
       end
 
       defoverridable [allowed_methods: 2, handle_delete: 2]
