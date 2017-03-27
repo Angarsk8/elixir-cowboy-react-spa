@@ -22,7 +22,7 @@ defmodule TodoApp.TodosHandler do
   end
 
   def handle_post(req, user) do
-    {:ok, params, req} = :cowboy_req.read_body(req)
+    {:ok, params, req} = :cowboy_req.body(req)
     decoded_params = Poison.decode!(params)
 
     changeset =

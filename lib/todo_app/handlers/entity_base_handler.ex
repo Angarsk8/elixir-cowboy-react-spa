@@ -8,8 +8,8 @@ defmodule TodoApp.Entity.BaseHandler do
 
       # Default REST Callbacks
 
-      def init(req, opts) do
-        {:cowboy_rest, req, opts}
+      def init({:tcp, :http}, req, _opts) do
+        {:upgrade, :protocol, :cowboy_rest}
       end
 
       def content_types_provided(req, state) do

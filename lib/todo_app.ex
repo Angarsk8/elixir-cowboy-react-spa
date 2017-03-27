@@ -9,9 +9,9 @@ defmodule TodoApp do
     ]
 
     dispatch = :cowboy_router.compile(hosts)
-    {:ok, _} = :cowboy.start_clear(:http, 100,
+    {:ok, _} = :cowboy.start_http(:http, 100,
       [port: port],
-      %{env: %{dispatch: dispatch}}
+      [env: [dispatch: dispatch]]
     )
 
     opts = [strategy: :one_for_one, name: TodoApp.Supervisor]
@@ -24,7 +24,7 @@ defmodule TodoApp do
     ]
   end
 
-  def static_routes do
+  defp static_routes do
     [
       {"/", :cowboy_static, {:priv_file, :todo_app, "build/index.html"}},
       {"/static/[...]", :cowboy_static, {:priv_dir, :todo_app, "build/static"}}

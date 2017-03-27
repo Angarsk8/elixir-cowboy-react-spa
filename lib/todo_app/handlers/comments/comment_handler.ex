@@ -9,8 +9,8 @@ defmodule TodoApp.CommentHandler do
   # REST Handlers
 
   def handle_get(req, user) do
-    todo_id = :cowboy_req.binding(:todo_id, req)
-    comment_id = :cowboy_req.binding(:comment_id, req)
+    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
+    {comment_id, req} = :cowboy_req.binding(:comment_id, req)
 
     query =
       user
@@ -33,9 +33,9 @@ defmodule TodoApp.CommentHandler do
   end
 
   def handle_update(req, user) do
-    todo_id = :cowboy_req.binding(:todo_id, req)
-    comment_id = :cowboy_req.binding(:comment_id, req)
-    {:ok, params, req} = :cowboy_req.read_body(req)
+    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
+    {comment_id, req} = :cowboy_req.binding(:comment_id, req)
+    {:ok, params, req} = :cowboy_req.body(req)
     decoded_params = Poison.decode!(params)
 
     query =
@@ -68,8 +68,8 @@ defmodule TodoApp.CommentHandler do
   end
 
   def handle_delete(req, user) do
-    todo_id = :cowboy_req.binding(:todo_id, req)
-    comment_id = :cowboy_req.binding(:comment_id, req)
+    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
+    {comment_id, req} = :cowboy_req.binding(:comment_id, req)
 
     user
     |> assoc(:todos)

@@ -33,9 +33,11 @@ defmodule TodoApp.Mixfile do
       {:ecto, "~> 2.1"},
       {:postgrex, "~> 0.13.2"},
       {:faker, "~> 0.7.0"},
-      {:cowboy, [env: :prod, git: "https://github.com/ninenines/cowboy.git", tag: "2.0.0-pre.7", override: true]},
+      # {:cowboy, [env: :prod, git: "https://github.com/ninenines/cowboy.git", tag: "2.0.0-pre.5", override: true]},
+      {:cowboy, "~> 1.1"},
       {:poison, "~> 3.0"},
-      {:guardian, "~> 0.14"}
+      {:guardian, "~> 0.14"},
+      {:distillery, "~> 0.9"}
     ]
   end
 

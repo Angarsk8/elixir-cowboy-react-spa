@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects'
-import { getAuthToken, setAuthToken } from '../utils/http'
+import { getAuthToken, setAuthToken, removeAuthToken } from '../utils/http'
 import { userActions, todosActions } from '../actions'
 import { userApi } from '../api'
 
@@ -17,6 +17,7 @@ function* initialSetup() {
     }
     yield put(todosActions.fetchTodosRequest())
   } catch (e) {
+    yield call(removeAuthToken)
     console.error(`Initial setup failed: ${e.message}`)
   }
 }

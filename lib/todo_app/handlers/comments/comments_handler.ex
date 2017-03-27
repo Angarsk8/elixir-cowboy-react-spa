@@ -9,7 +9,7 @@ defmodule TodoApp.CommentsHandler do
   # REST Handlers
 
   def handle_get(req, user) do
-    todo_id = :cowboy_req.binding(:todo_id, req)
+    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
     comments =
       user
       |> assoc(:todos)
@@ -25,8 +25,8 @@ defmodule TodoApp.CommentsHandler do
   end
 
   def handle_post(req, user) do
-    todo_id = :cowboy_req.binding(:todo_id, req)
-    {:ok, params, req} = :cowboy_req.read_body(req)
+    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
+    {:ok, params, req} = :cowboy_req.body(req)
     decoded_params = Poison.decode!(params)
 
     changeset =
