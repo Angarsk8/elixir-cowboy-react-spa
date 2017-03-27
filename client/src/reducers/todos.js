@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { todosTypes } from '../constants'
+import { putProcessingStatus } from './helpers'
 
 function isFetching(state = false, action) {
   switch (action.type) {
@@ -7,6 +8,18 @@ function isFetching(state = false, action) {
       return true
     case todosTypes.FETCH_TODOS_SUCCESS:
     case todosTypes.FETCH_TODOS_FAILURE:
+      return false
+    default:
+      return state
+  }
+}
+
+function isCreating(state = false, action) {
+  switch (action.type) {
+    case todosTypes.CREATE_TODO_REQUEST:
+      return true
+    case todosTypes.CREATE_TODO_SUCCESS:
+    case todosTypes.CREATE_TODO_FAILURE:
       return false
     default:
       return state
@@ -90,6 +103,7 @@ function selectedTodoId(state = 0, action) {
 export default combineReducers({
   todos,
   isFetching,
+  isCreating,
   updating,
   deleting,
   selectedTodoId
@@ -106,6 +120,10 @@ export function getAllTodosIds({ todos }) {
 
 export function getFetchingStatus({ isFetching }) {
   return isFetching
+}
+
+export function getCreatingStatus({ isCreating }) {
+  return isCreating
 }
 
 export function getSelectedTodoId({ selectedTodoId }) {
@@ -131,12 +149,4 @@ function filterTodos(todos, filter) {
     default:
       return todos
   }
-}
-
-function putProcessingStatus(todos, updating, deleting) {
-  return todos.map(todo => ({
-    ...todo,
-    updating: updating.includes(todo.id),
-    deleting: deleting.includes(todo.id)
-  }))
 }

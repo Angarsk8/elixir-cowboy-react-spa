@@ -7,3 +7,38 @@
   color: #717171;
   border-top: 1px solid #e0e4e8;
 }
+
+#todos-view-footer .delete-all {
+  display: none;
+  align-items: center;
+  border: 1px solid #fc5953;
+  background: transparent;
+  color: #fc4b44;
+  border-radius: 3px;
+  padding: 8px 15px;
+  margin-right: 0;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: background-color 350ms ease,
+    color 350ms ease;
+}
+
+#todos-view-footer .delete-all:hover {
+  color: #fff;
+  background-color: #fc5953;
+}
+
+#todos-view-footer .delete-all.show {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  #todos-view-footer {
+    justify-content: space-between;
+  }
+
+  #todos-view-footer .delete-all {
+    color: #fff;
+    background-color: #fc5953;
+  }
+}

@@ -9,6 +9,7 @@ import {
   getAllTodosIds,
   getMarkedStatus,
   getFetchingStatus,
+  getCreatingStatus,
   getAllFilters,
   getFilter
 } from '../reducers'
@@ -18,6 +19,7 @@ function mapStateToProps(state) {
   return {
     todosIds: getAllTodosIds(state),
     isFetching: getFetchingStatus(state),
+    isCreating: getCreatingStatus(state),
     areAllCompleted: getMarkedStatus(state),
     availableFilters: getAllFilters(state),
     currentFilter: getFilter(state),

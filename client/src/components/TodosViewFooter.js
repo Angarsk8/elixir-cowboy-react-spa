@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import ActionCheckbox from './ActionCheckbox'
 import './TodosViewFooter.css'
 
@@ -20,12 +21,14 @@ function TodosViewFooter({
       >
         {areAllCompleted ? 'Unmark all todos' : 'Mak all as completed'}
       </ActionCheckbox>
-      <ActionCheckbox
-        show={areAllCompleted && todosIds.length}
-        action={() => { deleteAllTodos(todosIds) }}
+      <div
+        className={classNames('delete-all', {
+          show: areAllCompleted && todosIds.length
+        })}
+        onClick={() => { deleteAllTodos(todosIds) }}
       >
-        Delete all
-      </ActionCheckbox>
+        Delete All
+      </div>
     </footer>
   )
 }

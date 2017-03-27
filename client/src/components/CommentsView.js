@@ -4,7 +4,7 @@ import CommentsViewFooter from './CommentsViewFooter'
 import Loading from './Loading'
 import './CommentsView.css'
 
-function CommentsView({ todoId, isFetching, createComment }) {
+function CommentsView({ todoId, isFetching, isCreating, createComment }) {
   return (
     <section className="comments-view">
       <div className="main">
@@ -14,6 +14,7 @@ function CommentsView({ todoId, isFetching, createComment }) {
       </div>
       <CommentsViewFooter
         todoId={todoId}
+        isCreating={isCreating}
         createComment={createComment}
       />
     </section>

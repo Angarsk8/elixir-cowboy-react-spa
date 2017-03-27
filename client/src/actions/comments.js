@@ -64,12 +64,12 @@ export function createCommentFailure() {
   }
 }
 
-export function deleteCommentRequest(todoId, commentId) {
+export function deleteCommentRequest(todoId, id) {
   return {
     type: commentsTypes.DELETE_COMMENT_REQUEST,
     payload: {
       todoId,
-      commentId
+      id
     }
   }
 }
@@ -83,18 +83,21 @@ export function deleteComment(id) {
   }
 }
 
-export function deleteCommentFailure() {
+export function deleteCommentFailure(id) {
   return {
-    type: commentsTypes.DELETE_COMMENT_FAILURE
+    type: commentsTypes.DELETE_COMMENT_FAILURE,
+    payload: {
+      id
+    }
   }
 }
 
-export function updateCommentRequest(todoId, commentId, changes) {
+export function updateCommentRequest(todoId, id, changes) {
   return {
     type: commentsTypes.UPDATE_COMMENT_REQUEST,
     payload: {
       todoId,
-      commentId,
+      id,
       changes
     }
   }
@@ -109,8 +112,11 @@ export function updateComment(comment) {
   }
 }
 
-export function updateCommentFailure() {
+export function updateCommentFailure(id) {
   return {
-    type: commentsTypes.UPDATE_COMMENT_FAILURE
+    type: commentsTypes.UPDATE_COMMENT_FAILURE,
+    payload: {
+      id
+    }
   }
 }

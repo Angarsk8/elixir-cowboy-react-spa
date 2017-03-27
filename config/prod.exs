@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :todo_app, http: %{port: 4000}
+config :todo_app, http: %{port: 80}
 
 config :logger, level: :info
 

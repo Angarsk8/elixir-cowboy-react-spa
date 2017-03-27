@@ -9,15 +9,14 @@ defmodule TodoApp.Handler.Helpers do
   end
 
   def set_headers(req, headers \\ %{}) do
-    # :cowboy_req.set_resp_headers(headers, req)
     Enum.reduce(headers, req, fn {k, v}, acc ->
       set_header(acc, k, v)
     end)
   end
 
-  def reply(req, status_code, result \\ :ok, state \\ :no_state) do
+  def reply(req, status_code, result \\ :ok) do
     req = :cowboy_req.reply(status_code, req)
-    {result, req, state}
+    {result, req}
   end
 
   def default_headers do

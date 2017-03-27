@@ -26,10 +26,10 @@ function* createComment(action) {
 function* deleteComment(action) {
   try {
     yield call(commentsApi.deleteComment, action.payload)
-    yield put(commentsActions.deleteComment(action.payload.commentId))
+    yield put(commentsActions.deleteComment(action.payload.id))
   } catch (e) {
     console.error(`${action.type} failed: ${e.message}`)
-    yield put(commentsActions.deleteCommentFailure())
+    yield put(commentsActions.deleteCommentFailure(action.payload.id))
   }
 }
 

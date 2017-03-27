@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import classNames from 'classnames'
 import './CommentItem.css'
 
 class CommentItem extends Component {
@@ -42,11 +43,16 @@ class CommentItem extends Component {
   }
 
   render() {
-    const updatedAt = new Date(this.props.updatedAt)
-    const formattedDate = moment(updatedAt).fromNow()
+    const { text, updating, deleting, updatedAt } = this.props
+    const formattedDate = moment(new Date(updatedAt)).fromNow()
+    const commentClass = classNames('comment-item', {
+      updating,
+      deleting
+    })
+
     return (
       <li
-        className="comment-item animated"
+        className={commentClass}
         onClick={this._onClickComment.bind(this)}
       >
         <section className="left">
@@ -58,7 +64,7 @@ class CommentItem extends Component {
             ref={node => { this.textRef = node }}
             spellCheck={false}
           >
-            {this.props.text}
+            {text}
           </div>
           <div className="time-ago">
             <i className="fa fa-clock-o" aria-hidden="true"></i>

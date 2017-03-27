@@ -6,8 +6,12 @@
   transition: background-color 350ms ease;
 }
 
-.comment-item.processing {
+.comment-item.updating {
   background-color: #fffbf3;
+}
+
+.comment-item.deleting {
+  background-color: #fff8f8;
 }
 
 .comment-item section.left {

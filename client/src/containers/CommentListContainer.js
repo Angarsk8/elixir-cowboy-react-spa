@@ -38,11 +38,11 @@ function mapActionsToProps(dispatch) {
     fetchComments(todoId) {
       dispatch(fetchCommentsRequest(todoId))
     },
-    deleteComment(todoId, commentId) {
-      dispatch(deleteCommentRequest(todoId, commentId))
+    deleteComment(todoId, id) {
+      dispatch(deleteCommentRequest(todoId, id))
     },
-    updateComment(todoId, commentId, changes) {
-      dispatch(updateCommentRequest(todoId, commentId, changes))
+    updateComment(todoId, id, changes) {
+      dispatch(updateCommentRequest(todoId, id, changes))
     }
   }
 }

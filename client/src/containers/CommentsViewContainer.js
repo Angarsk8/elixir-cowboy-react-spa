@@ -2,14 +2,16 @@ import { connect } from 'react-redux'
 import { createCommentRequest } from '../actions'
 import {
   getSelectedTodoId,
-  getCommentsFetchingStatus
+  getCommentsFetchingStatus,
+  getCommentsCreatingStatus
 } from '../reducers'
 import CommentsView from '../components/CommentsView'
 
 function mapStateToProps(state) {
   return {
     todoId: getSelectedTodoId(state),
-    isFetching: getCommentsFetchingStatus(state)
+    isFetching: getCommentsFetchingStatus(state),
+    isCreating: getCommentsCreatingStatus(state)
   }
 }
 

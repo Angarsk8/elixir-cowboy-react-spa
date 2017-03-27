@@ -25,6 +25,10 @@ export function getFetchingStatus({ todos }) {
   return todosSelectors.getFetchingStatus(todos)
 }
 
+export function getCreatingStatus({ todos }) {
+  return todosSelectors.getCreatingStatus(todos)
+}
+
 export function getSelectedTodoId({ todos }) {
   return todosSelectors.getSelectedTodoId(todos)
 }
@@ -51,6 +55,10 @@ export function getAllComments({ comments }) {
 
 export function getCommentsFetchingStatus({ comments }) {
   return commentsSelectors.getFetchingStatus(comments)
+}
+
+export function getCommentsCreatingStatus({ comments }) {
+  return commentsSelectors.getCreatingStatus(comments)
 }
 
 export function getCurrentUser({ user }) {

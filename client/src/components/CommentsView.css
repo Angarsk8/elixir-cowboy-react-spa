@@ -9,26 +9,3 @@
   flex: 1;
   overflow-y: scroll;
 }
-
-.comments-view > footer {
-  display: flex;
-}
-
-.comments-view > footer form {
-  padding: 0;
-  margin: 0;
-  border-top: 1px solid #e0e4e8;
-  min-height: 50px;
-  display: flex;
-  flex: 1;
-}
-
-.comments-view > footer input {
-  display: flex;
-  padding-left: 15px;
-  margin: 0;
-  border: none;
-  color: #717171;
-  font-size: 14px;
-  flex: 1;
-}

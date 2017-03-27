@@ -15,4 +15,9 @@
   color: #717171;
   font-size: 14px;
   flex: 1;
+  transition: background-color 350ms ease;
+}
+
+#comments-view-footer input.processing {
+  background-color: #fffbf3;
 }

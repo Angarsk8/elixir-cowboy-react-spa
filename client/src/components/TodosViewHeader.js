@@ -1,9 +1,16 @@
 import React from 'react'
 import Select from 'react-select';
+import classNames from 'classnames'
 import 'react-select/dist/react-select.css';
 import './TodosViewHeader.css'
 
-function TodosViewHeader({ currentFilter, filters, createTodo, filterTodos }) {
+function TodosViewHeader({
+  isCreating,
+  currentFilter,
+  filters,
+  createTodo,
+  filterTodos
+}) {
   return (
     <header id="todos-view-header">
       <section className="left">
@@ -24,7 +31,9 @@ function TodosViewHeader({ currentFilter, filters, createTodo, filterTodos }) {
         />
       </section>
       <a
-        className="add-todo"
+        className={classNames('add-todo', {
+          processing: isCreating
+        })}
         href="#"
         onClick={e => {
           e.preventDefault()

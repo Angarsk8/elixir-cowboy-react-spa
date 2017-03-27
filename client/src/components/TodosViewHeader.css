@@ -41,6 +41,10 @@
   transform: scale(1.1);
 }
 
+#todos-view-header .add-todo.processing {
+  background-color: #febb32;
+}
+
 @media (max-width: 768px) {
   #todos-view-header .add-todo {
     height: 36px;

@@ -6,6 +6,7 @@ import './TodosView.css'
 
 function TodosView({
   isFetching,
+  isCreating,
   currentFilter,
   availableFilters,
   createTodo,
@@ -15,6 +16,7 @@ function TodosView({
   return (
     <div className="todos-view">
       <TodosViewHeader
+        isCreating={isCreating}
         createTodo={createTodo}
         currentFilter={currentFilter}
         filters={availableFilters}

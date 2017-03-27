@@ -9,7 +9,7 @@ defmodule TodoApp do
     ]
 
     dispatch = :cowboy_router.compile(hosts)
-    {:ok, _} = :cowboy.start_http(:http, 100,
+    {:ok, _} = :cowboy.start_http(:http_listener, 100,
       [port: port],
       [env: [dispatch: dispatch]]
     )
