@@ -6,9 +6,12 @@ function TodoList({ todos, ...rest }) {
   return (
     <ReactCSSTransitionGroup
       transitionName={{
+        appear: "fadeIn",
         enter: "fadeInDown",
         leave: "zoomOut"
       }}
+      transitionAppear={true}
+      transitionAppearTimeout={600}
       transitionEnterTimeout={600}
       transitionLeaveTimeout={300}
       component="ul"

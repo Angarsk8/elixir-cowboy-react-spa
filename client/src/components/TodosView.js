@@ -5,7 +5,7 @@ import TodosViewMain from './TodosViewMain'
 import './TodosView.css'
 
 function TodosView({
-  isFetching,
+  isBusy,
   isCreating,
   currentFilter,
   availableFilters,
@@ -22,7 +22,7 @@ function TodosView({
         filters={availableFilters}
         filterTodos={filterTodos}
       />
-      <TodosViewMain isFetching={isFetching} />
+      <TodosViewMain isBusy={isBusy} />
       <TodosViewFooter { ...rest } />
     </div>
   )

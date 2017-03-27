@@ -6,9 +6,10 @@ import {
   setFilter
 } from '../actions'
 import {
+  getInitializingStatus,
+  getFetchingStatus,
   getAllTodosIds,
   getMarkedStatus,
-  getFetchingStatus,
   getCreatingStatus,
   getAllFilters,
   getFilter
@@ -16,9 +17,12 @@ import {
 import TodosView from '../components/TodosView'
 
 function mapStateToProps(state) {
+  const isBusy =
+    getInitializingStatus(state) || getFetchingStatus(state)
+
   return {
+    isBusy,
     todosIds: getAllTodosIds(state),
-    isFetching: getFetchingStatus(state),
     isCreating: getCreatingStatus(state),
     areAllCompleted: getMarkedStatus(state),
     availableFilters: getAllFilters(state),

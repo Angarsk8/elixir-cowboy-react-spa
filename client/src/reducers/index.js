@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
+import application, * as appSelectors from './application'
 import todos, * as todosSelectors from './todos'
 import filter, * as filterSelectors from './filter'
 import comments, * as commentsSelectors from './comments'
 import user, * as userSelectors from './user'
 
 const rootReducer = combineReducers({
+  application,
   todos,
   filter,
   comments,
@@ -12,6 +14,10 @@ const rootReducer = combineReducers({
 })
 
 export default rootReducer
+
+export function getInitializingStatus({ application }) {
+  return appSelectors.getInitializingStatus(application)
+}
 
 export function getAllTodos({ todos, filter }) {
   return todosSelectors.getAllTodos(todos, filter)
