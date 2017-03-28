@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { commentsTypes } from '../constants'
+import { commentsTypes, todosTypes } from '../constants'
 import { putProcessingStatus } from './helpers'
 
 function isFetching(state = false, action) {
@@ -30,6 +30,8 @@ function comments(state = [], action) {
   switch (action.type) {
     case commentsTypes.FETCH_COMMENTS_SUCCESS:
       return action.payload.comments
+    case commentsTypes.CREATE_COMMENT_SUCCESS:
+      return [...state, action.payload.comment]
     case commentsTypes.UPDATE_COMMENT_SUCCESS:
       const { comment } = action.payload
       return state.map(_comment => {
@@ -42,8 +44,9 @@ function comments(state = [], action) {
       return state.filter(comment =>
         comment.id !== action.payload.id
       )
-    case commentsTypes.CREATE_COMMENT_SUCCESS:
-      return [...state, action.payload.comment]
+    case todosTypes.DELETE_TODO_SUCCESS:
+    case todosTypes.DELETE_ALL_TODOS_SUCCESS:
+      return []
     default:
       return state
   }
