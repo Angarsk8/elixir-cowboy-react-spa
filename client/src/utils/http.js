@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import 'es6-promise'
+import { polyfill } from 'es6-promise'
 
 const { scheme, hostname } =
   process.env.NODE_ENV === 'production'

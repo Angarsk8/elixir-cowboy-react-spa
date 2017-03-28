@@ -4,6 +4,7 @@ import ActionCheckbox from './ActionCheckbox'
 import './TodosViewFooter.css'
 
 function TodosViewFooter({
+  isBusy,
   todosIds,
   areAllCompleted,
   toggleAllTodos,
@@ -13,7 +14,7 @@ function TodosViewFooter({
   return (
     <footer id="todos-view-footer">
       <ActionCheckbox
-        show={todosIds.length}
+        show={todosIds.length && !isBusy}
         checked={areAllCompleted}
         action={() => {
           toggleAllTodos(todosIds, !areAllCompleted)

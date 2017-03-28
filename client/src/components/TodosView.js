@@ -23,7 +23,10 @@ function TodosView({
         filterTodos={filterTodos}
       />
       <TodosViewMain isBusy={isBusy} />
-      <TodosViewFooter { ...rest } />
+      <TodosViewFooter
+        isBusy={isBusy}
+        { ...rest }
+      />
     </div>
   )
 }

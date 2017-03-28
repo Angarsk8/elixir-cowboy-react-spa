@@ -33,7 +33,4 @@ end
 release :todo_app do
   set applications: [:guardian, :poison]
   set version: current_version(:todo_app)
-  set commands: [
-    "migrate": "rel/commands/migrate.sh"
-  ]
 end
