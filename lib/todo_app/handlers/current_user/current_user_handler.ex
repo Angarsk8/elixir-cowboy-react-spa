@@ -16,7 +16,6 @@ defmodule TodoApp.CurrentUserHandler do
 
   def handle_get(req, user) do
     req
-    |> set_headers(default_headers)
     |> set_body(render(:show, user: user))
     |> reply(200)
   end

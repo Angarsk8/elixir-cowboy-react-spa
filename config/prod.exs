@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :todo_app, http: [port: System.get_env("PORT") || 80]
+config :todo_app, http: [port: {:system, "PORT", 80}]
 
 config :logger, level: :info
 

@@ -50,7 +50,7 @@ defmodule TodoApp do
 
   defp port(app) do
     app
-    |> Application.get_env(:http)
+    |> Env.fetch!(:http)
     |> Access.get(:port)
     |> handle_port
   end

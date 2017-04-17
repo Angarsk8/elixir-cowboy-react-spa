@@ -19,7 +19,6 @@ defmodule TodoApp.CommentsHandler do
       |> Repo.all
 
     req
-    |> set_headers(default_headers)
     |> set_body(render(:index, comments: comments))
     |> reply(200)
   end
@@ -39,12 +38,10 @@ defmodule TodoApp.CommentsHandler do
     case Repo.insert(changeset) do
       {:ok, comment} ->
         req
-        |> set_headers(default_headers)
         |> set_body(render(:show, comment: comment))
         |> reply(200)
       {:error, cs} ->
         req
-        |> set_headers(default_headers)
         |> set_body(render(:errors, changeset: cs))
         |> reply(422, false)
     end

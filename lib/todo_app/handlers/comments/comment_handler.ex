@@ -21,12 +21,10 @@ defmodule TodoApp.CommentHandler do
     case Repo.get(query, comment_id) do
       %Comment{} = comment ->
         req
-        |> set_headers(default_headers)
         |> set_body(render(:show, comment: comment))
         |> reply(200)
       nil ->
         req
-        |> set_headers(default_headers)
         |> set_body(render(:not_found, []))
         |> reply(404, false)
     end
@@ -50,18 +48,15 @@ defmodule TodoApp.CommentHandler do
         case Repo.update(changeset) do
           {:ok, comment} ->
             req
-            |> set_headers(default_headers)
             |> set_body(render(:show, comment: comment))
             |> reply(200)
           {:error, cs} ->
             req
-            |> set_headers(default_headers)
             |> set_body(render(:errors, changeset: cs))
             |> reply(422, false)
         end
       nil ->
         req
-        |> set_headers(default_headers)
         |> set_body(render(:not_found, []))
         |> reply(404, false)
     end
@@ -79,7 +74,6 @@ defmodule TodoApp.CommentHandler do
     |> Repo.delete!
 
     req
-    |> set_headers(default_headers)
     |> set_body(%{ok: true})
     |> reply(200)
   end

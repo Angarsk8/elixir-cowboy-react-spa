@@ -16,7 +16,6 @@ defmodule TodoApp.TodosHandler do
       |> Repo.all
 
     req
-    |> set_headers(default_headers)
     |> set_body(render(:index, todos: todos))
     |> reply(200)
   end
@@ -33,12 +32,10 @@ defmodule TodoApp.TodosHandler do
     case Repo.insert(changeset) do
       {:ok, todo} ->
         req
-        |> set_headers(default_headers)
         |> set_body(render(:show, todo: todo))
         |> reply(200)
       {:error, cs} ->
         req
-        |> set_headers(default_headers)
         |> set_body(render(:errors, changeset: cs))
         |> reply(422, false)
     end

@@ -16,7 +16,7 @@ defmodule TodoApp.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [mod: {TodoApp, []},
-     applications: [:logger, :cowboy, :ecto, :postgrex, :faker],
+     applications: [:logger, :cowboy, :ecto, :postgrex, :faker, :env],
      included_applications: [:plug, :guardian, :poison]]
   end
 
@@ -32,12 +32,13 @@ defmodule TodoApp.Mixfile do
   defp deps do
     [
       {:ecto, "~> 2.1"},
-      {:postgrex, ">= 0.0.0"},
+      {:postgrex, "~> 0.13.2"},
       {:faker, "~> 0.7.0"},
       {:cowboy, "~> 1.1"},
       {:poison, "~> 3.0"},
       {:guardian, "~> 0.14"},
-      {:distillery, "~> 0.9"}
+      {:distillery, "~> 0.9"},
+      {:env, "~> 0.2.0"}
     ]
   end
 

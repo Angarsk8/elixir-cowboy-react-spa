@@ -19,7 +19,6 @@ defmodule TodoApp.RegistrationsHandler do
     jwt = encode_and_sign(user)
 
     req
-    |> set_headers(default_headers)
     |> set_body(render(:show, jwt: jwt, user: user))
     |> reply(200)
   end

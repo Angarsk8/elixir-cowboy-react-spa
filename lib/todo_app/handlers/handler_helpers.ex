@@ -1,4 +1,9 @@
 defmodule TodoApp.Handler.Helpers do
+  def method!(req) do
+    {method, _} = :cowboy_req.method(req)
+    method
+  end
+
   def set_body(req, body) do
     body = Poison.encode!(body)
     :cowboy_req.set_resp_body(body, req)
@@ -17,10 +22,5 @@ defmodule TodoApp.Handler.Helpers do
   def reply(req, status_code, result \\ :ok) do
     req = :cowboy_req.reply(status_code, req)
     {result, req}
-  end
-
-  def default_headers do
-    %{"Access-Control-Allow-Origin" => "*",
-      "Access-Control-Allow-Headers" => "Content-Type,Authorization"}
   end
 end
