@@ -37,10 +37,11 @@ class AppSidebar extends Component {
 function App() {
   return (
     <div id="app">
+      <AppSidebar />
       <main>
         <TodosViewContainer />
       </main>
-      <AppSidebar />
+      <div className="screen"></div>
     </div>
   )
 }

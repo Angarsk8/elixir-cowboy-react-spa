@@ -5,7 +5,7 @@ defmodule TodoApp.RegistrationView do
     %{
       data: %{
         jwt: jwt,
-        user: TodoApp.UserView.render(:user, %{user: user})
+        user: TodoApp.UserView.render(:user, user: user)
       }
     }
   end

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import fetch from 'isomorphic-fetch'
 import { polyfill } from 'es6-promise'
 

@@ -17,3 +17,6 @@ erl_crash.dump
 *.ez
 
 /rel/todo_app
+
+.env
+/.vscode

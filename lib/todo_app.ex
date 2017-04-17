@@ -10,7 +10,7 @@ defmodule TodoApp do
 
     dispatch = :cowboy_router.compile(hosts)
     {:ok, _} = :cowboy.start_http(:http_listener, 100,
-      [port: port],
+      [port: port(:todo_app)],
       [env: [dispatch: dispatch]]
     )
 
@@ -48,8 +48,13 @@ defmodule TodoApp do
     end
   end
 
-  defp port do
-     %{port: port} = Application.get_env(:todo_app, :http)
-     port
+  defp port(app) do
+    app
+    |> Application.get_env(:http)
+    |> Access.get(:port)
+    |> handle_port
   end
+
+  defp handle_port(port) when is_integer(port), do: port
+  defp handle_port(port) when is_binary(port), do: String.to_integer(port)
 end

@@ -2,7 +2,7 @@ defmodule TodoApp.Authorization.Helpers do
   alias TodoApp.GuardianSerializer
 
   def encode_and_sign(resource) do
-    { :ok, token, _encoded_claims } = Guardian.encode_and_sign(resource, :access)
+    {:ok, token, _encoded_claims} = Guardian.encode_and_sign(resource, :access)
     token
   end
 

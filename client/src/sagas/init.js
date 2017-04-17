@@ -7,8 +7,7 @@ import {
 import {
   appActions,
   userActions,
-  todosActions,
-  commentsActions
+  todosActions
 } from '../actions'
 import { userApi, todosApi, commentsApi } from '../api'
 
