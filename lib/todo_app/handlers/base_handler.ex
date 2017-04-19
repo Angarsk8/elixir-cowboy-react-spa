@@ -47,12 +47,12 @@ defmodule TodoApp.BaseHandler do
 
       # Private Functions
 
-      defp handler_for("OPTION"), do: :handle_option
-      defp handler_for("GET"),    do: :handle_get
-      defp handler_for("POST"),   do: :handle_post
-      defp handler_for("PUT"),    do: :handle_update
-      defp handler_for("PATCH"),  do: :handle_update
-      defp handler_for("DELETE"), do: :handle_delete
+      defp handler_for("OPTIONS"), do: :handle_option
+      defp handler_for("GET"),     do: :handle_get
+      defp handler_for("POST"),    do: :handle_post
+      defp handler_for("PUT"),     do: :handle_update
+      defp handler_for("PATCH"),   do: :handle_update
+      defp handler_for("DELETE"),  do: :handle_delete
 
       defp default_headers do
         %{"Access-Control-Allow-Origin" => "*",
