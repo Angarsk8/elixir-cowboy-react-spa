@@ -2,6 +2,8 @@ defmodule TodoApp.Repo do
   use Ecto.Repo, otp_app: :todo_app
 
   def init(_, opts) do
+    Application.start(:env)
+
     opts =
       opts
       |> Enum.into(%{})
