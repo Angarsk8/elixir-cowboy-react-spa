@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    env_file: &environment
+      - .env
+  web:
+    image: angarsk8/todo_app
+    restart: on-failure
+    command: _build/prod/rel/todo_app/bin/todo_app foreground
+    env_file: *environment
+    ports:
+      - "80:8080"
+    depends_on:
+      - migration
+    links:
+      - db
+  migration:
+    image: angarsk8/todo_app
+    restart: on-failure
+    command: mix ecto.setup
+    env_file: *environment
+    links:
+      - db

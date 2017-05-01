@@ -1,0 +1,15 @@
+.git
+.gitignore
+LICENSE
+README.md
+_build
+cover
+deps
+doc
+test
+tmp
+erl_crash.dump
+*.ez
+.vscode
+.env
+docker-compose.yml

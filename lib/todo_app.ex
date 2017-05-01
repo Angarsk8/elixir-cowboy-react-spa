@@ -8,7 +8,7 @@ defmodule TodoApp do
       supervisor(TodoApp.Repo, [])
     ]
 
-    dispatch = :cowboy_router.compile(hosts)
+    dispatch = :cowboy_router.compile(hosts())
     {:ok, _} = :cowboy.start_http(:http_listener, 100,
       [port: port(:todo_app)],
       [env: [dispatch: dispatch]]
@@ -20,7 +20,7 @@ defmodule TodoApp do
 
   defp hosts do
     [
-      _: static_routes ++ api(:v1, api_routes)
+      _: static_routes() ++ api(:v1, api_routes())
     ]
   end
 

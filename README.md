@@ -43,18 +43,27 @@ Demo available [here](http://174.138.84.252/).
 
 To start this application locally:
 
-* Make sure you have installed _Elixir_, _Erlang_, _Node_, _Yarn_ and _PostgreSQL_
-* Install the Mix dependencies: `$ mix deps.get`
-* Create and migrate the development database: `$ mix ecto.setup`
-* Start the application with all its dependencies: `$ iex -S mix`
-* Install the Node packages `$ cd client/  && yarn install`
-* Start the web development server: `$ yarn start`
+1. Make sure you have installed _Elixir_, _Erlang_, _Node_, _Yarn_ and _PostgreSQL_
+2. Install the Mix dependencies: `$ mix deps.get`
+3. Create and migrate the development database: `$ mix ecto.setup`
+4. Start the application with all its dependencies: `$ iex -S mix`
+5. Install the Node packages `$ cd client/  && yarn install`
+6. Start the web development server: `$ yarn start`
 
 To build the JavaScript application for production:
 * In the client directory, run `$ yarn build`
 
-To generate a release for production:
-* Execute the mix release task with the MIX_ENV variable set to production: `MIX_ENV=prod mix release --env=prod`
+## Deployment with Docker
+
+To run this application in production with Docker:
+
+1. Make sure both `docker` and `docker-compose` are installed on your production server.
+2. Create a `.env` file anywhere in your server:
+  * Copy the information from [this](.env) file.
+  * Replace the placeholders with the data you want.
+3. Create a `docker-compose.yml` file in the same directory that you created the `.env` file:
+  * Copy the information from [this](docker-compose.yml) file.
+4. Start the services by running `$ docker-compose up -d`.
 
 ## License
 

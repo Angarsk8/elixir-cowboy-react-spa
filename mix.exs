@@ -16,8 +16,8 @@ defmodule TodoApp.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [mod: {TodoApp, []},
-     applications: [:logger, :cowboy, :ecto, :postgrex, :faker, :env],
-     included_applications: [:plug, :guardian, :poison]]
+     applications: [:logger, :cowboy, :ecto, :postgrex, :env],
+     included_applications: [:plug, :guardian, :poison, :faker]]
   end
 
   # Dependencies can be Hex packages:
@@ -36,8 +36,8 @@ defmodule TodoApp.Mixfile do
       {:faker, "~> 0.7.0"},
       {:cowboy, "~> 1.1"},
       {:poison, "~> 3.0"},
-      {:guardian, "~> 0.14"},
-      {:distillery, "~> 0.9"},
+      {:guardian, "~> 0.14.2"},
+      {:distillery, "~> 1.1.0"},
       {:env, "~> 0.2.0"}
     ]
   end

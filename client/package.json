@@ -28,7 +28,7 @@
     "start": "react-scripts start",
     "clean-previous-build": "find ../priv/build/ -xdev -depth -mindepth 1 -exec rm -Rf {} \\;",
     "move-new-build": "cp -r build/. ../priv/build",
-    "build": "react-scripts build && yarn clean-previous-build && yarn move-new-build",
+    "build": "react-scripts build && npm run clean-previous-build && npm run move-new-build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
