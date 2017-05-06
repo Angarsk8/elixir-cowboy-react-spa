@@ -8,8 +8,7 @@ defmodule TodoApp.TodoHandler do
 
   # REST Handlers
 
-  def handle_get(req, user) do
-    {id, req} = :cowboy_req.binding(:id, req)
+  def index(req, user, %{id: id}) do
     query = assoc(user, :todos)
 
     case Repo.get(query, id) do
@@ -24,15 +23,12 @@ defmodule TodoApp.TodoHandler do
     end
   end
 
-  def handle_update(req, user) do
-    {id, req} = :cowboy_req.binding(:id, req)
-    {:ok, params, req} = :cowboy_req.body(req)
-    decoded_params = Poison.decode!(params)
+  def update(req, user, %{id: id, body: todo_params}) do
     query = assoc(user, :todos)
 
     case Repo.get(query, id) do
       %Todo{} = todo ->
-        changeset = Todo.changeset(todo, decoded_params)
+        changeset = Todo.changeset(todo, todo_params)
         case Repo.update(changeset) do
           {:ok, todo} ->
             req
@@ -50,9 +46,7 @@ defmodule TodoApp.TodoHandler do
     end
   end
 
-  def handle_delete(req, user) do
-    {id, req} = :cowboy_req.binding(:id, req)
-
+  def delete(req, user, %{id: id}) do
     user
     |> assoc(:todos)
     |> Repo.get!(id)

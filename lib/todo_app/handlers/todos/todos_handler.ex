@@ -8,7 +8,7 @@ defmodule TodoApp.TodosHandler do
 
   # REST Handlers
 
-  def handle_get(req, user) do
+  def index(req, user, _params) do
     todos =
       user
       |> assoc(:todos)
@@ -20,14 +20,11 @@ defmodule TodoApp.TodosHandler do
     |> reply(200)
   end
 
-  def handle_post(req, user) do
-    {:ok, params, req} = :cowboy_req.body(req)
-    decoded_params = Poison.decode!(params)
-
+  def create(req, user, %{body: post_params}) do
     changeset =
       user
       |> build_assoc(:todos)
-      |> Todo.changeset(decoded_params)
+      |> Todo.changeset(post_params)
 
     case Repo.insert(changeset) do
       {:ok, todo} ->

@@ -14,7 +14,7 @@ defmodule TodoApp.CurrentUserHandler do
 
   # REST Handlers
 
-  def handle_get(req, user) do
+  def index(req, user, _params) do
     req
     |> set_body(render(:show, user: user))
     |> reply(200)

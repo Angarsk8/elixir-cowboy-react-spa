@@ -34,7 +34,7 @@ defmodule TodoApp.Mixfile do
       {:ecto, "~> 2.1"},
       {:postgrex, "~> 0.13.2"},
       {:faker, "~> 0.7.0"},
-      {:cowboy, "~> 1.1"},
+      {:cowboy, github: "ninenines/cowboy", tag: "2.0.0-pre.8", override: true},
       {:poison, "~> 3.0"},
       {:guardian, "~> 0.14.2"},
       {:distillery, "~> 1.1.0"},

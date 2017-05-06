@@ -8,8 +8,7 @@ defmodule TodoApp.CommentsHandler do
 
   # REST Handlers
 
-  def handle_get(req, user) do
-    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
+  def index(req, user, %{todo_id: todo_id}) do
     comments =
       user
       |> assoc(:todos)
@@ -23,17 +22,13 @@ defmodule TodoApp.CommentsHandler do
     |> reply(200)
   end
 
-  def handle_post(req, user) do
-    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
-    {:ok, params, req} = :cowboy_req.body(req)
-    decoded_params = Poison.decode!(params)
-
+  def create(req, user, %{todo_id: todo_id, body: comment_params}) do
     changeset =
       user
       |> assoc(:todos)
       |> Repo.get(todo_id)
       |> build_assoc(:comments)
-      |> Comment.changeset(decoded_params)
+      |> Comment.changeset(comment_params)
 
     case Repo.insert(changeset) do
       {:ok, comment} ->

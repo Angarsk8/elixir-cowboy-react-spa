@@ -18,4 +18,3 @@ erl_crash.dump
 
 /.vscode
 /rel/todo_app
-/priv/build/*

@@ -14,7 +14,7 @@ defmodule TodoApp.RegistrationsHandler do
 
   # REST Handlers
 
-  def handle_post(req, _state) do
+  def create(req, _state, _params) do
     user = Repo.insert!(%User{})
     jwt = encode_and_sign(user)
 

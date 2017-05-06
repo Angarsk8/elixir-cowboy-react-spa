@@ -1,9 +1,4 @@
 defmodule TodoApp.Handler.Helpers do
-  def method!(req) do
-    {method, _} = :cowboy_req.method(req)
-    method
-  end
-
   def set_body(req, body) do
     body = Poison.encode!(body)
     :cowboy_req.set_resp_body(body, req)
@@ -14,9 +9,21 @@ defmodule TodoApp.Handler.Helpers do
   end
 
   def set_headers(req, headers \\ %{}) do
-    Enum.reduce(headers, req, fn {k, v}, acc ->
-      set_header(acc, k, v)
-    end)
+    :cowboy_req.set_resp_headers(headers, req)
+  end
+
+  def read_and_decode_body(req) do
+    {:ok, body, req} = :cowboy_req.read_body(req)
+    {decode_body(body), req}
+  end
+
+  defp decode_body(body) do
+    case Poison.decode(body) do
+      {:ok, decoded_value} ->
+        decoded_value
+      _ ->
+        %{}
+    end
   end
 
   def reply(req, status_code, result \\ :ok) do

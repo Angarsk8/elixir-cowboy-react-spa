@@ -8,8 +8,8 @@ defmodule TodoApp.BaseHandler do
 
       # Default REST Callbacks
 
-      def init({:tcp, :http}, req, _opts) do
-        {:upgrade, :protocol, :cowboy_rest}
+      def init(req, state) do
+        {:cowboy_rest, req, state}
       end
 
       def content_types_provided(req, state) do
@@ -30,29 +30,34 @@ defmodule TodoApp.BaseHandler do
 
       # Default REST Handlers
 
-      def handle(req, state) do
+      def handle(%{method: method} = req, state) do
         req = set_headers(req, default_headers())
-        handler = handler_for(method!(req))
-        apply(__MODULE__, handler, [req, state])
+
+        {decoded_body, req} = read_and_decode_body(req)
+        bindings = :cowboy_req.bindings(req)
+        params = Map.put(bindings, :body, decoded_body)
+
+        handler = handler_for(method)
+        apply(__MODULE__, handler, [req, state, params])
       end
 
-      def handle_option(req, state) do
+      def options(req, state, _params) do
         req = set_header(req, "Access-Control-Allow-Methods", "PUT,PATCH,DELETE")
         {:ok, req, state}
       end
 
-      def handle_delete(req, state) do
+      def delete(req, state, _params) do
         {false, req, state}
       end
 
       # Private Functions
 
-      defp handler_for("OPTIONS"), do: :handle_option
-      defp handler_for("GET"),     do: :handle_get
-      defp handler_for("POST"),    do: :handle_post
-      defp handler_for("PUT"),     do: :handle_update
-      defp handler_for("PATCH"),   do: :handle_update
-      defp handler_for("DELETE"),  do: :handle_delete
+      defp handler_for("OPTIONS"), do: :options
+      defp handler_for("GET"),     do: :index
+      defp handler_for("POST"),    do: :create
+      defp handler_for("PUT"),     do: :update
+      defp handler_for("PATCH"),   do: :update
+      defp handler_for("DELETE"),  do: :delete
 
       defp default_headers do
         %{"Access-Control-Allow-Origin" => "*",
@@ -61,7 +66,7 @@ defmodule TodoApp.BaseHandler do
 
       # Overridable Functions
 
-      defoverridable [handle_delete: 2]
+      defoverridable [delete: 3]
     end
   end
 end

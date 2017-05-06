@@ -9,9 +9,9 @@ defmodule TodoApp do
     ]
 
     dispatch = :cowboy_router.compile(hosts())
-    {:ok, _} = :cowboy.start_http(:http_listener, 100,
+    {:ok, _} = :cowboy.start_clear(:http_listener, 100,
       [port: port(:todo_app)],
-      [env: [dispatch: dispatch]]
+      %{env: %{dispatch: dispatch}}
     )
 
     opts = [strategy: :one_for_one, name: TodoApp.Supervisor]

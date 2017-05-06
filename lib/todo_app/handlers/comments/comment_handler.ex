@@ -8,10 +8,7 @@ defmodule TodoApp.CommentHandler do
 
   # REST Handlers
 
-  def handle_get(req, user) do
-    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
-    {comment_id, req} = :cowboy_req.binding(:comment_id, req)
-
+  def index(req, user, %{todo_id: todo_id, comment_id: comment_id}) do
     query =
       user
       |> assoc(:todos)
@@ -30,21 +27,16 @@ defmodule TodoApp.CommentHandler do
     end
   end
 
-  def handle_update(req, user) do
-    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
-    {comment_id, req} = :cowboy_req.binding(:comment_id, req)
-    {:ok, params, req} = :cowboy_req.body(req)
-    decoded_params = Poison.decode!(params)
-
+  def update(req, user, params) do
     query =
       user
       |> assoc(:todos)
-      |> Repo.get(todo_id)
+      |> Repo.get(params[:todo_id])
       |> assoc(:comments)
 
-    case Repo.get(query, comment_id) do
+    case Repo.get(query, params[:comment_id]) do
       %Comment{} = comment ->
-        changeset = Comment.changeset(comment, decoded_params)
+        changeset = Comment.changeset(comment, params[:body])
         case Repo.update(changeset) do
           {:ok, comment} ->
             req
@@ -62,10 +54,7 @@ defmodule TodoApp.CommentHandler do
     end
   end
 
-  def handle_delete(req, user) do
-    {todo_id, req} = :cowboy_req.binding(:todo_id, req)
-    {comment_id, req} = :cowboy_req.binding(:comment_id, req)
-
+  def delete(req, user, %{todo_id: todo_id, comment_id: comment_id}) do
     user
     |> assoc(:todos)
     |> Repo.get(todo_id)
