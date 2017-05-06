@@ -1,11 +1,11 @@
 # Cowboy + React SPA Example
 
-This is an example application that shows how to use Cowboy 1.1 in conjunction with React and Redux to create data driven Single Page Applications.
+This is an example application that shows how to use Cowboy 2.0 in conjunction with React and Redux to create data driven Single Page Applications.
 
 This project has been developed using the following technologies:
 
 * [Elixir 1.3.4](http://elixir-lang.org/)
-* [Cowboy 1.1](https://ninenines.eu/)
+* [Cowboy 2.0](https://ninenines.eu/)
 * [Ecto](https://github.com/elixir-ecto/ecto)
 * [PostgreSQL](https://www.postgresql.org/download/)
 * [React](https://facebook.github.io/react/)
